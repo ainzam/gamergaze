@@ -9,5 +9,5 @@ public class GamergazeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GamergazeApplication.class, args);
 	}
-
+//pluh
 }
