@@ -1,4 +1,4 @@
-package com.gamegaze.gamergaze;
+package com.gamegaze;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
