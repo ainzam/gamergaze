@@ -1,6 +1,6 @@
 package com.gamegaze.domain;
 
 public enum UserRole {
-    USER,
-    ADMIN
+	ROLE_USER,
+	ROLE_ADMIN
 }

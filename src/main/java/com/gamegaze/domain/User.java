@@ -1,69 +1,61 @@
 package com.gamegaze.domain;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import java.util.Collection;
+import java.util.Collections;
+
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name="users",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
 
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
+
+    @Column(name = "nombre")
+    private String name;
+
+    @Column(name = "apellido")
+    private String apellido;
+
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private UserRole UserRole;
-    private Boolean locked = false;
-    private Boolean enabled = false;
 
-    public User(String firstName,
-                   String lastName,
-                   String email,
-                   String password,
-                   UserRole UserRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.UserRole = UserRole;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(UserRole.name());
-        return Collections.singletonList(authority);
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
@@ -72,26 +64,13 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return true; 
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return true; 
     }
 
     @Override
@@ -101,6 +80,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 }
