@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  body {
+    background-color: black; /* Fondo negro */
+    display: flex; /* Utilizar flexbox para centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa de la ventana del navegador */
+    margin: 0; /* Eliminar el margen predeterminado */
+  }
+
+  img {
+    width: 50%; /* 50% de ancho */
+    height: 50%; /* 50% de alto */
+  }
+</style>
+</head>
+<body>
+  <img th:src="@{/assets/gato.jpeg}" alt="Gato"> <!-- Imagen del gato -->
+</body>
+</html>

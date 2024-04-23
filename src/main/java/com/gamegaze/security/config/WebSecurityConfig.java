@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.gamegaze.service.UserService;
 
+import jakarta.servlet.DispatcherType;
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+	protected static final String[] ENDPOINTS_WHITELIST = { "/css/**", "/login", "/loginfailed", "/registration/**","/assets/**"};
 	private final UserService userService;
 
 	private final PasswordEncoder passwordEncoder;
@@ -25,10 +27,9 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
-				(authorize) -> authorize.requestMatchers("/registration/**").permitAll().anyRequest().authenticated())
-				.formLogin((form) -> form
-						.loginPage("/login")
-						.permitAll());
+				(authorize) -> authorize.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
+				.requestMatchers(ENDPOINTS_WHITELIST).permitAll().anyRequest().authenticated())
+				.formLogin((form) -> form.loginPage("/login"));
 
 		return http.build();
 	}

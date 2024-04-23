@@ -1,5 +1,7 @@
 package com.gamegaze.controllers;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,11 @@ public class LoginController {
 	@GetMapping(value = "/login")
 	public String login() {
 		return "login";
+	}
+	
+	@GetMapping(value = "/")
+	public String root(HttpServletRequest request) throws ServletException, IOException {
+		return "home";
 	}
 
 	@GetMapping(value = "/loginfailed")

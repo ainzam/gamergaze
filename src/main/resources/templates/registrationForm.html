@@ -16,25 +16,25 @@
     <form th:action="@{/registration}" method="post">
         <div class="input-group mt-4">
             <div class="input-group-text bg-info">
-                <img src="@{/assets/user-icon.svg}" alt="user-icon" style="height: 1rem"/>
+                <img th:src="@{/assets/user-icon.svg}" alt="user-icon" style="height: 1rem"/>
             </div>
             <input class="form-control bg-light" type="text" placeholder="First Name" name="firstName"/>
         </div>
         <div class="input-group mt-1">
             <div class="input-group-text bg-info">
-                <img src="@{/assets/user-icon.svg}" alt="user-icon" style="height: 1rem"/>
+                <img th:src="@{/assets/user-icon.svg}" alt="user-icon" style="height: 1rem"/>
             </div>
             <input class="form-control bg-light" type="text" placeholder="Last Name" name="lastName"/>
         </div>
         <div class="input-group mt-1">
             <div class="input-group-text bg-info">
-                <img src="@{/assets/email-icon.svg}" alt="email-icon" style="height: 1rem"/>
+                <img th:src="@{/assets/email-icon.svg}" alt="email-icon" style="height: 1rem"/>
             </div>
             <input class="form-control bg-light" type="email" placeholder="Email" name="email"/>
         </div>
         <div class="input-group mt-1">
             <div class="input-group-text bg-info">
-                <img src="@{/assets/password-icon.svg}" alt="password-icon" style="height: 1rem"/>
+                <img th:src="@{/assets/password-icon.svg}" alt="password-icon" style="height: 1rem"/>
             </div>
             <input class="form-control bg-light" type="password" placeholder="Password" name="password"/>
         </div>
@@ -42,7 +42,7 @@
     </form>
     <div class="d-flex gap-1 justify-content-center mt-1">
         <div>Already have an account?</div>
-        <a href="/login" class="text-decoration-none text-info fw-semibold">Login</a>
+        <a th:href="@{/login}" class="text-decoration-none text-info fw-semibold">Login</a>
     </div>
 </div>
 </body>

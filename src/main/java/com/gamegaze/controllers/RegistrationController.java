@@ -26,6 +26,7 @@ public class RegistrationController {
                            @RequestParam("email") String email,
                            @RequestParam("password") String password) {
         registrationService.register(firstName, lastName, email, password);
-        return "redirect:/registration-success";
+        return "redirect:/login";
     }
+
 }
