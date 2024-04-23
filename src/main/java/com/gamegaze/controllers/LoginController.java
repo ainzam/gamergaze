@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 	
-	//@GetMapping(value = "/login")
+	@GetMapping(value = "/login")
 	public String login() {
 		return "login";
 	}

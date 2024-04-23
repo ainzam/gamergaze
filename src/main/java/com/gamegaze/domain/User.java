@@ -35,11 +35,11 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
-    private String name;
+    @Column(name = "firstName")
+    private String firstName;
 
-    @Column(name = "apellido")
-    private String apellido;
+    @Column(name = "lastName")
+    private String lastName;
 
     private String email;
     private String password;
@@ -48,6 +48,15 @@ public class User implements UserDetails {
     @Column(name = "role")
     private UserRole role;
 
+	public User(String firstName, String lastName, String email, String password, UserRole role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
@@ -61,6 +70,14 @@ public class User implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
@@ -82,4 +99,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

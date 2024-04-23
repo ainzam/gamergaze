@@ -24,17 +24,19 @@ public class WebSecurityConfig {
 
 	private final PasswordEncoder passwordEncoder;
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
-				(authorize) -> authorize.requestMatchers("/registration").permitAll().anyRequest().authenticated())
-				.formLogin(withDefaults()).logout((logout) -> logout.permitAll());
+				(authorize) -> authorize.requestMatchers("/registration/**").permitAll().anyRequest().authenticated())
+				.formLogin((form) -> form
+						.loginPage("/login")
+						.permitAll());
 
 		return http.build();
 	}
 
-	@Bean
-	public AuthenticationManager authenticationManager() {
+    @Bean
+    AuthenticationManager authenticationManager() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		authenticationProvider.setUserDetailsService(userService);
 		authenticationProvider.setPasswordEncoder(passwordEncoder);

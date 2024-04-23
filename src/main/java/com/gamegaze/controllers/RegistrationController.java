@@ -3,7 +3,8 @@ package com.gamegaze.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.gamegaze.service.RegistrationService;
 
 import lombok.AllArgsConstructor;
@@ -15,12 +16,16 @@ public class RegistrationController {
 	private final RegistrationService registrationService;
 	
 	@GetMapping(value = "/registration")
-	public String login() {
-		return "login";
+	public String registration() {
+		return "registrationForm";
 	}
 	
-    @PostMapping
-    public String register(@RequestBody RegistrationRequest request) {
-        return registrationService.register(request);
+    @PostMapping("/registration")
+    public String register(@RequestParam("firstName") String firstName,
+                           @RequestParam("lastName") String lastName,
+                           @RequestParam("email") String email,
+                           @RequestParam("password") String password) {
+        registrationService.register(firstName, lastName, email, password);
+        return "redirect:/registration-success";
     }
 }
