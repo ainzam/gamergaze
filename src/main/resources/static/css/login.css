@@ -1,0 +1,9 @@
+body{
+	background-image:url("/assets/gifLogin.gif");
+	background-repeat: no-repeat center center;
+	background-size: cover;
+}
+
+#cuerpo{
+	background: linear-gradient(to bottom right, red, yellow);
+}
