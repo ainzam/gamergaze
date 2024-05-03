@@ -10,10 +10,11 @@ body {
 
 @keyframes slideImages {
     0% {
-        
+        background: url('/assets/eldenring.gif');
+        background-size: cover;
     }
     25% {
-        background: url('/assets/bioshock.gif');
+        background: url('/assets/hollownight.gif');
         background-size: cover;
     }
     50% {
@@ -21,11 +22,11 @@ body {
         background-size: cover;
     }
     75% {
-        background: url('/assets/snake.gif');
+        background: url('/assets/avion.gif');
         background-size: cover;
     }
     100% {
-        background: url('/assets/avion.gif');
+        background: url('/assets/rainworld.gif');
         background-size: cover;
     }
 }
