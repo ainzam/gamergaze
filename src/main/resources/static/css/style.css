@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.user-img{
+    width: 50px;
+    border-radius: 100%;
+    border: 1px solid #eee;
+}

@@ -1,25 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-  body {
-    background-color: black; /* Fondo negro */
-    display: flex; /* Utilizar flexbox para centrar verticalmente */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    height: 100vh; /* Altura completa de la ventana del navegador */
-    margin: 0; /* Eliminar el margen predeterminado */
-  }
-
-  img {
-    width: 50%; /* 50% de ancho */
-    height: 50%; /* 50% de alto */
-  }
-</style>
-</head>
-<body>
-  <img th:src="@{/assets/gato.jpeg}" alt="Gato"> <!-- Imagen del gato -->
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Home / gamergaze</title>
+		<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<link rel="stylesheet" th:href="@{/css/style.css}" href="style.css">
+	</head>
+	<body>
+		<div class="sidebar">
+			<div class="top">
+				<div class="logo">
+					<i class="bx bxl-codepen"></i>
+					<span>CodeCommerce</span>
+				</div>
+				<i class="bx bx-menu" id="btn"></i>
+			</div>
+			<div class="user">
+				<img th:src="@{/assets/username-icon.svg}" alt="user-image" class="user-img">
+				<div>
+					<p class="bold">Clint b.</p>
+					<p>Admin</p>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-cog"></i>
+						<span class="nav-item">Settings</span>
+					</a>
+					<span class="tooltip">Settings</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bx-log-out"></i>
+						<span class="nav-item">Logout</span>
+					</a>
+					<span class="tooltip">Logout</span>
+				</li>
+			</ul>
+		</div>
+	</body>
 </html>
