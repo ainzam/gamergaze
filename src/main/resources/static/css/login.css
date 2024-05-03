@@ -1,9 +1,63 @@
-body{
-	background-image:url("/assets/gifLogin.gif");
-	background-repeat: no-repeat center center;
-	background-size: cover;
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    background: url('/assets/avion.gif');
+    background-size: cover;
+    animation: slideImages 20s ease-out infinite;
 }
 
-#cuerpo{
-	background: linear-gradient(to bottom right, red, yellow);
+@keyframes slideImages {
+    0% {
+        
+    }
+    25% {
+        background: url('/assets/bioshock.gif');
+        background-size: cover;
+    }
+    50% {
+        background: url('/assets/gta.gif');
+        background-size: cover;
+    }
+    75% {
+        background: url('/assets/snake.gif');
+        background-size: cover;
+    }
+    100% {
+        background: url('/assets/avion.gif');
+        background-size: cover;
+    }
 }
+
+#cuerpo {
+    backdrop-filter: blur(50px);
+    background: linear-gradient(to bottom right, #0D0C1D, #161B33);
+    box-shadow: 10px 10px 10px black !important;
+}
+
+#iconImage{
+	border-radius: 10%;
+}
+
+#registerText{
+	color: #F1DAC4 !important;
+}
+
+#dhaText{
+	color: #A69CAC !important;
+}
+
+.input-group-text{
+	background-color: #474973 !important;
+}
+
+#loginBotoBackground{
+	background-color: #474973 !important;
+}
+
+#dhaText{
+	color: white !important;
+}
+
+

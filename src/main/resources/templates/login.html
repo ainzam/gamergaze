@@ -15,37 +15,26 @@
 <body class="d-flex justify-content-center align-items-center vh-100">
 <div class="p-5 rounded-5 text-secondary shadow" id="cuerpo" style="width: 25rem">
     <div class="d-flex justify-content-center">
-        <img th:src="@{/assets/login-icon.svg}" alt="login-icon" style="height: 7rem"/>
+        <img id="iconImage" th:src="@{/assets/loginPP.png}" alt="login-icon" style="height: 14rem"/>
     </div>
-    <div class="text-center fs-1 fw-bold">Login</div>
     <form th:action="@{/login}" method="post">
         <div class="input-group mt-4">
-            <div class="input-group-text bg-info">
+            <div class="input-group-text">
                 <img th:src="@{/assets/username-icon.svg}" alt="username-icon" style="height: 1rem"/>
             </div>
-            <input class="form-control bg-light" type="text" placeholder="Username" name="username"/>
+            <input class="form-control" type="text" placeholder="Username" name="username"/>
         </div>
         <div class="input-group mt-1">
-            <div class="input-group-text bg-info">
+            <div class="input-group-text">
                 <img th:src="@{/assets/password-icon.svg}" alt="password-icon" style="height: 1rem"/>
             </div>
-            <input class="form-control bg-light" type="password" placeholder="Password" name="password"/>
+            <input class="form-control" type="password" placeholder="Password" name="password"/>
         </div>
-        <div class="d-flex justify-content-around mt-1">
-            <div class="d-flex align-items-center gap-1">
-                <input class="form-check-input" type="checkbox" id="rememberMe" name="remember-me"/>
-                <label class="form-check-label" for="rememberMe">Remember me</label>
-            </div>
-            <div>
-                <a href="#" class="text-decoration-none text-info fw-semibold fst-italic"
-                   style="font-size: 0.9rem">Forgot your password?</a>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">Login</button>
+        <button id="loginBotoBackground" type="submit" class="btn text-white w-100 mt-4 fw-semibold shadow-sm">Login</button>
     </form>
     <div class="d-flex gap-1 justify-content-center mt-1">
-        <div>Don't have an account?</div>
-        <a th:href="@{/registration}" class="text-decoration-none text-info fw-semibold">Register</a>
+        <div id="dhaText">Don't have an account?</div>
+        <a th:href="@{/registration}" id="registerText" class="text-decoration-none text-info fw-semibold">Register</a>
     </div>
 </div>
 </body>
