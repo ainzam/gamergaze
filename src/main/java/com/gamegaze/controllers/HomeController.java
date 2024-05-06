@@ -13,7 +13,6 @@ import com.gamegaze.service.UserService;
 
 
 @Controller
-
 public class HomeController {
 	
 	@Autowired
@@ -28,7 +27,9 @@ public class HomeController {
 		return model;
     }
     
-    
-    
+    @GetMapping(value = "/createPost")
+    public String createPost() {
+    	return null;
+    } 
 	
 }

@@ -1,5 +1,11 @@
 package com.gamegaze.domain;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -17,11 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import java.util.Collection;
-import java.util.Collections;
 
 @Getter
 @Setter
@@ -59,6 +60,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
+    
+    private List<Publication> usersPost;
 
 	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
 		super();
