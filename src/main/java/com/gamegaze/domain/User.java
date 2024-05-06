@@ -2,7 +2,6 @@ package com.gamegaze.domain;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,7 +60,6 @@ public class User implements UserDetails {
     @Column(name = "role")
     private UserRole role;
     
-    private List<Publication> usersPost;
 
 	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
 		super();
