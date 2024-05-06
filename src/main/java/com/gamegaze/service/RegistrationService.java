@@ -13,8 +13,9 @@ public class RegistrationService {
 	
 	private final UserService userService;
 
-	public String register(String firstName, String lastName,String email,String password) {
-		return userService.signUpUser(new User(firstName,lastName,email,password,UserRole.ROLE_USER));
+	public String register(User user) {
+		user.setRole(UserRole.ROLE_USER);
+		return userService.signUpUser(user);
 	}
 
 }

@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,23 +37,34 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El nombre no puede estar vacío")
     @Column(name = "firstName")
     private String firstName;
 
+    @NotBlank(message = "El apellido no puede estar vacío")
     @Column(name = "lastName")
     private String lastName;
+    
+    @NotBlank(message = "El username no puede estar vacío")
+    @Column(name = "username")
+    private String username;
 
+    @NotBlank(message = "El correo electrónico no puede estar vacío")
+    @Email(message = "Debe ser una dirección de correo electrónico válida")
     private String email;
+
+    @NotBlank(message = "La contraseña no puede estar vacía")
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
 
-	public User(String firstName, String lastName, String email, String password, UserRole role) {
+	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
@@ -64,6 +77,10 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
+        return username;
+    }
+    
+    public String getEmail() {
         return email;
     }
 

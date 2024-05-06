@@ -29,7 +29,7 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests(
 				(authorize) -> authorize.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
 				.requestMatchers(ENDPOINTS_WHITELIST).permitAll().anyRequest().authenticated())
-				.formLogin((form) -> form.loginPage("/login"));
+				.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/home", true));
 
 		return http.build();
 	}
