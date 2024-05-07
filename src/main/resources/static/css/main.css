@@ -177,30 +177,34 @@ nav {
     width: 20%;
 }
 
-.create-box{
-    background: #474973;
-    width: 125px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    color: #fff;
+.create-box {
+  background: #474973;
+  width: 125px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  color: #fff;
 }
 
-.create-box i{
-    width: 20px;
+.create-box i {
+  width: 20px;
 }
 
-.create-box a{
-    background: transparent;
-    padding: 10px;
-    font-size: 13px;
-    text-decoration: none;
-    color: #fff;
+.create-box a {
+  background: transparent;
+  padding: 10px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #fff;
 }
-.create-box:hover , .create-box a:hover{
-    background: #F1DAC4;
-    color: #0D0C1D;
+
+.create-box:hover {
+  background: #F1DAC4;
+}
+
+.create-box:hover * {
+  color: #0D0C1D;
 }
 
 .logovt{
@@ -235,7 +239,7 @@ nav {
 
 .main-content{
     position: relative;
-    background-color: #F1DAC4;
+    background-color: #161B33;
     min-height: calc(100vh - 78px);
     top:78px;
     left: 78px;
@@ -260,12 +264,12 @@ nav {
 
 .post{
     width: 80%;
-    background: #A69CAC;
+    background: #F1DAC4;
     border-radius: 6px;
     padding: 20px;
     color:#0D0C1D;
     margin: 20px 0;
-    box-shadow: 7px 10px 15px 2px;
+    box-shadow: 8px 8px 0px 0px #A69CAC;
 }
 .user-profile{
     display: flex;
@@ -280,11 +284,11 @@ nav {
 
 .user-profile span{
     font-size: 13px;
-    color: #9a9a9a;
+    color: #0D0C1D;
 }
 
 .post-text{
-    color: #000;
+    color: #0D0C1D;
     margin: 15px 0;
     font-size: 15px;
 }
@@ -300,12 +304,13 @@ nav {
 }
 
 .events{
-    background: #fff;
+    background: #F1DAC4;
     border-radius: 6px;
     margin: 20px 0;
     width: 100%;
     padding: 20px;
-    color: #626262;
+    color: #0D0C1D;
+    box-shadow: 5px 5px 0px 0px #A69CAC;
 }
 
 .events-title{
