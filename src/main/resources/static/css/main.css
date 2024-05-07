@@ -111,7 +111,7 @@
 }
 
 .sidebar ul li a:hover{
-    background-color: #fff;
+    background-color: #F1DAC4;
     color: #0D0C1D; 
 }
 
@@ -178,7 +178,7 @@ nav {
 }
 
 .create-box{
-    background: #0D0C1D;
+    background: #474973;
     width: 125px;
     border-radius: 20px;
     display: flex;
@@ -199,7 +199,7 @@ nav {
     color: #fff;
 }
 .create-box:hover , .create-box a:hover{
-    background: #efefef;
+    background: #F1DAC4;
     color: #0D0C1D;
 }
 
@@ -235,7 +235,7 @@ nav {
 
 .main-content{
     position: relative;
-    background-color: #E4E4E5;
+    background-color: #F1DAC4;
     min-height: calc(100vh - 78px);
     top:78px;
     left: 78px;
@@ -260,7 +260,7 @@ nav {
 
 .post{
     width: 80%;
-    background: #fff;
+    background: #A69CAC;
     border-radius: 6px;
     padding: 20px;
     color:#0D0C1D;
@@ -283,7 +283,7 @@ nav {
 }
 
 .post-text{
-    color: #9a9a9a;
+    color: #000;
     margin: 15px 0;
     font-size: 15px;
 }
