@@ -265,6 +265,7 @@ nav {
     padding: 20px;
     color:#0D0C1D;
     margin: 20px 0;
+    box-shadow: 7px 10px 15px 2px;
 }
 .user-profile{
     display: flex;
