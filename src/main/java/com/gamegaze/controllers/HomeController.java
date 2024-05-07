@@ -31,6 +31,15 @@ public class HomeController {
     @PostMapping(value = "/createPost")
     public String createPost() {
     	return null;
-    } 
+    }
+    
+    @GetMapping(value="/imagesPruebas")
+	public String imagesPruebas(Model model) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User user =(User) userService.loadUserByUsername(username);
+		model.addAttribute(user);
+		return "profile";
+	}
 	
 }
