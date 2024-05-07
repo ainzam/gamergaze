@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="head">
+	    <meta charset="UTF-8"/>
+	    <link rel="icon" type="image/x-icon" th:href="@{/assets/logo-vt.svg}"/>
+		<title>GamerGaze</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<link rel="stylesheet" th:href="@{/css/style.css}" href="style.css">
+	</head>
+	<body>
+		<div class="sidebar active" th:fragment="sidebar">
+			<div class="top">
+				<div class="logo">
+					<img th:src="@{/assets/logo-vt.svg}" src="logo-vt.svg" class="logovt">
+					<span>GamerGaze</span>
+				</div>
+				<i class="bx bx-menu" id="btn"></i>
+			</div>
+			<div class="user">
+				<img th:src="@{/assets/loginPP.png}" alt="user-image" class="user-img">
+				<div>
+					<p class="bold" th:text="${user.firstName + ' ' + user.lastName}">
+					<p>Admin</p>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-grid-alt"></i>
+						<span class="nav-item">Dashboard</span>
+					</a>
+					<span class="tooltip">Dashboard</span>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-cog"></i>
+						<span class="nav-item">Settings</span>
+					</a>
+					<span class="tooltip">Settings</span>
+				</li>
+				<li>
+					<a th:href="@{/logout}">
+						<i class="bx bx-log-out"></i>
+						<span class="nav-item">Logout</span>
+					</a>
+					<span class="tooltip">Logout</span>
+				</li>
+			</ul>
+		</div>
+		<nav th:fragment="nav">
+            <div class="nav-right">
+				<div class="search-box">
+					<i class="bx bxs-search" style="height: 1rem"></i>
+					<input type="text" placeholder="Search">
+				</div>
+			</div>
+			<div class="nav-left">
+				<div class="create-box">
+					<i class="bx bx-plus-medical" style="height: 1rem"></i>
+					<a href="#">New post</a>
+				</div>
+			</div>
+        </nav>
+	</body>
+	<script>
+		var btn = document.querySelector("#btn");
+		var sidebar = document.querySelector(".sidebar");
+		btn.onclick = function(){
+			sidebar.classList.toggle('active');
+		};
+	</script>
+</html>

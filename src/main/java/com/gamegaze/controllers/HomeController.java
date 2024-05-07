@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gamegaze.domain.User;
 import com.gamegaze.service.UserService;
@@ -27,7 +28,7 @@ public class HomeController {
 		return model;
     }
     
-    @GetMapping(value = "/createPost")
+    @PostMapping(value = "/createPost")
     public String createPost() {
     	return null;
     } 
