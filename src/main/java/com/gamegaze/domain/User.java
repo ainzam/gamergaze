@@ -1,5 +1,8 @@
 package com.gamegaze.domain;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.ResourceUtils;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,7 +21,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -62,6 +68,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image bannerImage;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image profileImage;
     
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
     private List<Publication> publications;
@@ -122,6 +134,28 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+    
+
+    @Transient
+    public Image getProfileImage() {
+        if (profileImage != null && profileImage.getData() != null) {
+            return profileImage;
+        } else {
+            return getDefaultProfileImage();
+        }
+    }
+
+    private Image getDefaultProfileImage() {
+        Image defaultProfileImage = new Image();
+        try {
+            Path defaultImagePath = ResourceUtils.getFile("classpath:static/assets/logo-vt.svg").toPath();
+            byte[] imageData = Files.readAllBytes(defaultImagePath);
+            defaultProfileImage.setData(imageData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return defaultProfileImage;
     }
 
 

@@ -6,6 +6,8 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* css de sidebar de nav ------------------------------------------------------*/
+
 .user-img{
     width: 50px;
     border-radius: 100%;
@@ -21,12 +23,16 @@
     background-color: #0D0C1D;
     padding: .4rem .8rem;
     transition: all 0.5s ease;
+    z-index: 200;
 }
 .sidebar.active ~ .main-content{
     left: 250px;
     width: calc(100% - 250px);
 }
-
+.sidebar.active ~ .profile-container{
+    left: 250px;
+    width: calc(100% - 250px);
+}
 .sidebar.active ~ nav {
     left: 250px;
     width: calc(100% - 250px);
@@ -39,7 +45,6 @@
 .sidebar #btn{
     position: absolute;
     color: #fff;
-    top: .4rem;
     left: 50%;
     font-size: 1.2rem;
     line-height: 50px;
@@ -50,7 +55,12 @@
 .sidebar.active #btn{
     left: 90%;
 }
-
+.top{
+    height: 78px;
+    display: flex;
+    align-items: center;
+    
+}
 .sidebar .top .logo{
     color: #fff;
     display: flex;
@@ -151,6 +161,8 @@
     display: none;
 }
 
+/* css de barra horizontal de nav ------------------------------------------------------*/
+
 nav {
     position: fixed;
     top: 0;
@@ -173,10 +185,9 @@ nav {
 .nav-left{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     width: 20%;
 }
-
 .create-box {
   background: #474973;
   width: 125px;
@@ -236,6 +247,7 @@ nav {
     border: 0;
 }
 
+/* css de home.html ------------------------------------------------------*/
 
 .main-content{
     position: relative;
@@ -266,9 +278,9 @@ nav {
     width: 80%;
     background: #F1DAC4;
     border-radius: 6px;
+    margin: 20px 0;
     padding: 20px;
     color:#0D0C1D;
-    margin: 20px 0;
     box-shadow: 8px 8px 0px 0px #A69CAC;
 }
 .user-profile{
@@ -365,4 +377,122 @@ nav {
     color: #fff;
     font-size: 10px;
     padding: 4px 0;
+}
+
+/*css profile page ------------------------------------------------------*/
+
+.profile-container{
+    position: relative;
+    background-color: #161B33;
+    min-height: calc(100vh - 78px);
+    top:78px;
+    left: 78px;
+    transition: all 0.5s ease;
+    width: calc(100% - 78px);
+    padding: 13px 5%;
+    padding: 20px 15%;
+}
+
+.cover-img {
+    width: 100%;
+    height: 300px; 
+    background-image: url('foto.png');
+    background-size: cover; 
+    background-position: center;
+    border-radius: 6px;
+    margin-bottom: 14px;
+}
+.profile-details{
+    background: #F1DAC4;
+    box-shadow: 5px 5px 0px 0px #A69CAC;
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.pd-row{
+    display: flex;
+    align-items: flex-start;
+}
+.pd-image{
+    width: 100px;
+    margin-right: 20px;
+    border-radius: 6px;
+}
+
+.pd-row div h3{
+    font-size: 25px;
+    font-weight: 600;
+}
+.pd-row div p{
+    font-size: 13px;
+}
+
+.pd-right button{
+    background: #0D0C1D;
+    border: 0;
+    outline: 0;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    color: #F1DAC4;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.pd-right button i{
+    height: 15px;
+    margin-right: 10px;
+}
+
+.pd-right{
+    text-align: right;
+}
+
+.pd-right a{
+    color: #0D0C1D;
+    padding: 12px;
+    display: inline-flex;
+    margin-top: 30px;
+}
+
+.profile-info{
+    display: flex;
+    align-self: flex-start;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.info-col{
+    flex-basis: 33%;
+}
+.post-col{
+    flex-basis: 65%;
+}
+
+.postContainer-profile{
+    width: 100%!important;
+}
+
+.post-profile{
+    width: 100%!important;
+    margin: 0!important;
+}
+
+.profile-intro{
+    background: #F1DAC4;
+    box-shadow: 5px 5px 0px 0px #A69CAC;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.profile-intro{
+    font-weight: 600;
+}
+
+.intro-text{
+    margin: 10px 0;
+    font-size: 15px;
 }

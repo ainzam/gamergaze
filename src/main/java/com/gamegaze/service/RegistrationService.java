@@ -17,5 +17,4 @@ public class RegistrationService {
 		user.setRole(UserRole.ROLE_USER);
 		return userService.signUpUser(user);
 	}
-
 }

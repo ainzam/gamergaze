@@ -14,19 +14,26 @@
 		<div class="sidebar active" th:fragment="sidebar">
 			<div class="top">
 				<div class="logo">
-					<img th:src="@{/assets/logo-vt.svg}" src="logo-vt.svg" class="logovt">
+					<img th:src="@{'/image/' + ${user.profileImage.id}}" alt="user-profile" class="user-img">
 					<span>GamerGaze</span>
 				</div>
 				<i class="bx bx-menu" id="btn"></i>
 			</div>
-			<div class="user">
-				<img th:src="@{/assets/loginPP.png}" alt="user-image" class="user-img">
-				<div>
-					<p class="bold" th:text="${user.firstName + ' ' + user.lastName}">
-					<p>Admin</p>
-				</div>
-			</div>
 			<ul>
+				<li>
+					<a th:href="@{/home}">
+						<i class="bx bxs-home"></i>
+						<span class="nav-item">Home</span>
+					</a>
+					<span class="tooltip">Home</span>
+				</li>	
+				<li>
+					<a th:href="@{/profile}">
+						<i class="bx bxs-user"></i>
+						<span class="nav-item">Profile</span>
+					</a>
+					<span class="tooltip">Profile</span>
+				</li>
 				<li>
 					<a href="#">
 						<i class="bx bxs-group "></i>
@@ -82,6 +89,9 @@
 				<div class="create-box">
 					<i class="bx bx-plus-medical" style="height: 1rem"></i>
 					<a href="#">New post</a>
+				</div>
+				<div class="user">
+					<img th:src="${user.profileImage}" src="#" alt="user-image" class="user-img">
 				</div>
 			</div>
         </nav>

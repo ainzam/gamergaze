@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>GamerGaze</title>
-		<th:block th:include="~{fragments/template:: head}"></th:block>
-	</head>
-	<body>
-	    <div th:replace="~{fragments/template :: sidebar}"></div>
-	    <nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
-		<div class="main-content">
-			<h1>Upload Image</h1>
-			<form th:action="@{/uploadImage}" method="post" enctype="multipart/form-data">
-			    <input type="file" name="image" />
-			    <button type="submit">Upload</button>
-			</form>
+<head th:fragment="head">
+<title>GamerGaze - profile</title>
+<th:block th:include="~{fragments/template:: head}"></th:block>
+</head>
+<body>
+	<div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+	<div class="profile-container">
+		<div class="cover-img"></div>
+		<div class="profile-details">
+			<div class="pd-left">
+				<div class="pd-row">
+					<img class="pd-image"
+						src="C:\Users\andre\OneDrive\Imágenes\Capturas de pantalla\Captura de pantalla 2024-03-24 121143.png"
+						alt="">
+					<div>
+						<h3>Nicki Nicole</h3>
+						<p>120 Friends -20 mutual</p>
+					</div>
+				</div>
+			</div>
+			<div class="pd-right">
+				<button type="button">
+					<i class="bx bxs-user-plus"></i>Friends
+				</button>
+				<button type="button">
+					<i class="bx bxs-comment-dots"></i>Message
+				</button>
+				<br> <a href="#"><i class='bx bxs-edit-alt'></i></a>
+			</div>
 		</div>
-	</body>
+		<div class="profile-info">
+			<div class="info-col">
+				<div class="profile-intro">
+					<h3>Intro</h3>
+					<p class="intro-text">Belive in yourself and yu can do
+						unbelievable things</p>
+				</div>
+			</div>
+			<div class="post-col">
+				<div class="postContainer postContainer-profile">
+					<div class="post post-profile">
+						<div class="user-profile">
+							<img th:src="@{/assets/logo-vt.svg}" src="#">
+							<div>
+								<p>Andres Bernal Cochinita</p>
+								<span>6 de Junio 2024</span>
+							</div>
+						</div>
+						<p class="post-text">
+							Soy una cochinita muy cerdita, oink oink. <a href="#">#GamerGays</a>
+						</p>
+						<img th:src="@{/assets/logo-vt.svg}" src="#" class="post-img">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
