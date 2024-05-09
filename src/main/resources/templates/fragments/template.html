@@ -14,7 +14,7 @@
 		<div class="sidebar active" th:fragment="sidebar">
 			<div class="top">
 				<div class="logo">
-					<img th:src="@{'/image/' + ${user.profileImage.id}}" alt="user-profile" class="user-img">
+					<img th:src="@{/assets/logo-vt.svg}" src="logo-vt.svg" class="logovt">
 					<span>GamerGaze</span>
 				</div>
 				<i class="bx bx-menu" id="btn"></i>
@@ -91,7 +91,7 @@
 					<a href="#">New post</a>
 				</div>
 				<div class="user">
-					<img th:src="${user.profileImage}" src="#" alt="user-image" class="user-img">
+					<img th:src="@{/images/{id}(id=${user.profileImage.id})}" src="#" alt="user-image" class="user-img">
 				</div>
 			</div>
         </nav>

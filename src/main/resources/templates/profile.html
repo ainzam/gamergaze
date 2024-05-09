@@ -8,15 +8,15 @@
 	<div th:replace="~{fragments/template :: sidebar}"></div>
 	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
 	<div class="profile-container">
-		<div class="cover-img"></div>
+		<div class="cover-img" th:style="'background-image: url(' + @{/images/{id}(id=${user.bannerImage.id})} + ');'"></div>
 		<div class="profile-details">
 			<div class="pd-left">
 				<div class="pd-row">
 					<img class="pd-image"
-						src="C:\Users\andre\OneDrive\Imágenes\Capturas de pantalla\Captura de pantalla 2024-03-24 121143.png"
-						alt="">
+						th:src="@{/images/{id}(id=${user.profileImage.id})}"
+						alt="Banner">
 					<div>
-						<h3>Nicki Nicole</h3>
+						<h3><span th:text="${user.firstName}">Nicki</span> <span th:text="${user.lastName}">Nicole</span></h3>
 						<p>120 Friends -20 mutual</p>
 					</div>
 				</div>
