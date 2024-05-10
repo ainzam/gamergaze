@@ -43,20 +43,30 @@ public class ProfileController {
     public String updateProfile(@RequestParam("email") String email,
     		@RequestParam("lastName") String lastName,
     		@RequestParam("username") String username,
-    		@RequestParam("firstName") String firtsName,
+    		@RequestParam("firstName") String firstName,
             @Nullable @RequestParam("profileImage") MultipartFile profileImage, 
             @Nullable @RequestParam("bannerImage") MultipartFile bannerImage) throws IOException {
     	
     	User existingUser = (User) userService.loadUserByUsername(username);
 
-        if (profileImage!= null) {
-        	Image image = imageService.saveImage(profileImage);
-        	existingUser.setProfileImage(image);
+    	if (email!= null &&!email.isEmpty()) {
+            existingUser.setEmail(email);
+        }
+        if (lastName!= null &&!lastName.isEmpty()) {
+            existingUser.setLastName(lastName);
+        }
+        if (firstName!= null &&!firstName.isEmpty()) {
+            existingUser.setFirstName(firstName);
         }
 
-        if (bannerImage!= null) {
-        	Image image = imageService.saveImage(bannerImage);
-        	existingUser.setBannerImage(image);
+        if (!profileImage.isEmpty()) {
+            Image image = imageService.saveImage(profileImage);
+            existingUser.setProfileImage(image);
+        }
+
+        if (!bannerImage.isEmpty()) {
+            Image image = imageService.saveImage(bannerImage);
+            existingUser.setBannerImage(image);
         }
 
         userService.updateUser(existingUser);

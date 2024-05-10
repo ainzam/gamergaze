@@ -24,7 +24,7 @@ public class Image {
     private Long id;
     
     @Lob
-    @Column(length = 100000)
+    @Column(length = 1000000)
     private byte[] data;
    
 }
