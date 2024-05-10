@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +20,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Publication {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String textContent;
@@ -30,6 +32,12 @@ public class Publication {
     private LocalDateTime createdAt;
 
     private int likes;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Image> images;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 	
 }

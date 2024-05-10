@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>GamerGaze</title>
-		<th:block th:include="~{fragments/template:: head}"></th:block>
-	</head>
-	<body>
-	    <div th:replace="~{fragments/template :: sidebar}"></div>
-	    <nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
-		<div class="main-content">
-			<div class="postContainer">
-				<div class="post">
+<head>
+<title>GamerGaze</title>
+<th:block th:include="~{fragments/template:: head}"></th:block>
+</head>
+<body>
+	<div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+	<div class="main-content">
+		<div class="postContainer">
+			<div class="post">
+				<form th:action="@{/createPublication}" method="post">
 					<div class="user-profile">
-						<img th:src="@{/assets/logo-vt.svg}" src="logo-vt.svg">
-						<div>
-							<p>Andres Bernal Cochinita</p>
-							<span>6 de Junio 2024</span>
-						</div>
+						<img th:src="@{/images/{id}(id=${user.profileImage.id})}"
+							alt="User Profile Image"> <span th:text="${user.username}">Username</span>
 					</div>
-					<p class="post-text">Soy una cochinita muy cerdita, oink oink. <a href="#">#GamerGays</a>
-					</p>
-					<img th:src="@{/assets/logo-vt.svg}" src="logo-vt.svg" class="post-img">
-				</div>
+					<textarea name="textContent" placeholder="Write something..."></textarea>
+					<div class="post-img">
+					    <label for="file-upload" class="custom-file-upload">
+					        <i class='bx bxs-file-image'></i>
+					    </label>
+					    <input id="file-upload" type="file" name="images" multiple style="display: none;">
+					</div>
+					<button type="submit">Create Publication</button>
+				</form>
 			</div>
-			<div class="leftContainer">
-				<div class="events">
-					<div class="events-title">
-						<h4>Upcoming Events</h4>
-						<a href="#">See All</a>
+			<div th:each="publication : ${publications}" class="post">
+			    <div class="user-profile">
+			        <img th:src="@{/images/{id}(id=${publication.user.profileImage.id})}" alt="User Profile Image">
+			        <div>
+			            <p th:text="${publication.user.username}"></p>
+			            <span th:text="${#dates.format(publication.createdAt, 'dd MMMM yyyy')}"></span>
+			        </div>
+			    </div>
+			    <p class="post-text" th:text="${publication.textContent}"></p>
+			    <div class="post-img" th:each="image : ${publication.images}">
+			        <img th:src="@{/images/{id}(id=${image.id})}" alt="Publication Image">
+			    </div>
+			</div>
+		</div>
+		<div class="leftContainer">
+			<div class="events">
+				<div class="events-title">
+					<h4>Upcoming Events</h4>
+					<a href="#">See All</a>
+				</div>
+				<div class="event">
+					<div class="left-event">
+						<h3>18</h3>
+						<span>March</span>
 					</div>
-					<div class="event">
-						<div class="left-event">
-							<h3>18</h3>
-							<span>March</span>
-						</div>
-						<div class="right-event">
-							<h4>R6 Private Match</h4>
-							<p>PC</p>
-							<a href="#">More Info</a>
-						</div>
+					<div class="right-event">
+						<h4>R6 Private Match</h4>
+						<p>PC</p>
+						<a href="#">More Info</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 </html>

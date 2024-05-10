@@ -1,6 +1,7 @@
 package com.gamegaze.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.gamegaze.domain.Image;
+import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
 import com.gamegaze.service.ImageService;
 import com.gamegaze.service.UserService;
@@ -30,13 +30,15 @@ public class ProfileController {
 	private ImageService imageService;
 	
     @GetMapping("/profile")
-    public ModelAndView profile(Model model) {
+    public Model profile(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		User user =(User) userService.loadUserByUsername(username);
-		ModelAndView modelandview = new ModelAndView("profile");
-		modelandview.addObject(user);
-		return modelandview;
+		model.addAttribute(user);
+		
+		List<Publication> publications = userService.getPublicationsByUser(user);
+		model.addAttribute("publications", publications);
+		return model;
     }
 	
     @PostMapping("/profile/edit")

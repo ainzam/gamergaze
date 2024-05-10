@@ -273,7 +273,8 @@ nav {
     width: 80%;
     position: sticky;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .leftContainer{
@@ -541,4 +542,76 @@ nav {
   
 .modal-title{
   	font-weight: bold;
+}
+
+/* Estilo para el formulario de creación de publicación */
+.post form {
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.post form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #0D0C1D;
+    resize: none; /* Para evitar que se pueda redimensionar */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.post form .user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post form .user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post form .user-profile span {
+    color: #0D0C1D;
+    font-weight: bold;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #0D0C1D;
+    color: #F1DAC4;
+    border-radius: 6px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #161B33;
+}
+
+.custom-file-upload i {
+    margin-right: 5px;
+}
+
+
+.post form button[type="submit"] {
+    background-color: #0D0C1D;
+    color: #F1DAC4;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.post form button[type="submit"]:hover {
+    background-color: #161B33;
 }

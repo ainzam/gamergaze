@@ -91,7 +91,7 @@
 			<div class="nav-left">
 				<div class="create-box">
 					<i class="bx bx-plus-medical" style="height: 1rem"></i>
-					<a href="#">New post</a>
+					<a th:href="@{/createPost}">New post</a>
 				</div>
 				<div class="user">
 					<img th:src="@{/images/{id}(id=${user.profileImage.id})}" src="#" alt="user-image" class="user-img">
