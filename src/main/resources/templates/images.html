@@ -7,7 +7,7 @@
     <h1>Images</h1>
     <ul th:each="image : ${images}">
         <li>
-            <img th:src="@{/image/{id}(id=${image.id})}" />
+            <img th:src="@{/images/{id}(id=${image.id})}" />
         </li>
     </ul>
 </body>

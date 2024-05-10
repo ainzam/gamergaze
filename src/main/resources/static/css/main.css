@@ -6,6 +6,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+ol, ul{
+    padding-left: 0;
+}
+
 /* css de sidebar de nav ------------------------------------------------------*/
 
 .user-img{

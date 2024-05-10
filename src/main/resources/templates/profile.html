@@ -8,7 +8,8 @@
 	<div th:replace="~{fragments/template :: sidebar}"></div>
 	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
 	<div class="profile-container">
-		<div class="cover-img" th:style="'background-image: url(' + @{/images/{id}(id=${user.bannerImage.id})} + ');'"></div>
+		<div th:text="${user.bannerImage.id}"></div>
+		<!--  <div class="cover-img" th:style="'background-image: url(' + @{/images/{id}(id=${user.bannerImage.id})} + ');'"></div>-->
 		<div class="profile-details">
 			<div class="pd-left">
 				<div class="pd-row">
@@ -28,7 +29,7 @@
 				<button type="button">
 					<i class="bx bxs-comment-dots"></i>Message
 				</button>
-				<br> <a href="#"><i class='bx bxs-edit-alt'></i></a>
+				<br> <a href="#" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>
 			</div>
 		</div>
 		<div class="profile-info">
@@ -58,5 +59,6 @@
 			</div>
 		</div>
 	</div>
+	<th:block th:include="~{fragments/forms :: edit-profile-modal}"></th:block>
 </body>
 </html>

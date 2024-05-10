@@ -36,11 +36,5 @@ public class Publication {
 
     private int likes;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User createdBy;
-    
-    @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL)
-    private List<Image> images;
 	
 }

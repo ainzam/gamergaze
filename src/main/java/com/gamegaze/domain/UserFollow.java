@@ -27,5 +27,4 @@ public class UserFollow {
     @ManyToOne
     private User followed;
     
-    // Otros atributos y métodos si es necesario
 }

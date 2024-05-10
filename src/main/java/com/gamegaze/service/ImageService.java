@@ -19,10 +19,11 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
     
-    public void saveImage(MultipartFile image) throws IOException {
+    public Image saveImage(MultipartFile image) throws IOException {
         Image imageEntity = new Image();
         imageEntity.setData(image.getBytes());
         imageRepository.save(imageEntity);
+        return imageEntity;
     }
     
     public List<Image> getImages() {
