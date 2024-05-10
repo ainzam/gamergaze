@@ -10,7 +10,7 @@
 	<div class="main-content">
 		<div class="postContainer">
 			<div class="post">
-				<form th:action="@{/createPublication}" method="post">
+				<form th:action="@{/createPublication}" method="post" enctype="multipart/form-data">
 					<div class="user-profile">
 						<img th:src="@{/images/{id}(id=${user.profileImage.id})}"
 							alt="User Profile Image"> <span th:text="${user.username}">Username</span>

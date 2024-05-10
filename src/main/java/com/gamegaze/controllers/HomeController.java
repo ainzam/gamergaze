@@ -51,24 +51,30 @@ public class HomeController {
     }
     
     @PostMapping("/createPublication")
-    public String createPost(@RequestParam("textContent") String textContent,@Nullable @RequestParam("images") MultipartFile[] images) throws IOException {
-    	setCurrentUser();
+    public String createPost(@RequestParam("textContent") String textContent, @RequestParam("images") MultipartFile[] images) throws IOException {
+        setCurrentUser();
         Publication publication = new Publication();
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
-        
+
         List<Image> imagespost = new ArrayList<>();
-        
-        if(images != null && images.length > 0) {
-	        for (MultipartFile image : images) {
-	            Image imgsave = imageService.saveImage(image);
-	            imagespost.add(imgsave);
-	        }
-	        publication.setImages(imagespost);
+
+        if (images!= null && images.length > 0) {
+            for (MultipartFile image : images) {
+                try {
+                    Image imgsave = imageService.saveImage(image);
+                    imagespost.add(imgsave);
+                    System.out.println("Image saved successfully: {}");
+                } catch (Exception e) {
+                	System.out.println("Error saving image: {}");
+                }
+            }
+        } else {
+        	System.out.println("No images provided");
         }
-        
+
+        publication.setImages(imagespost);
         publicationService.savePublication(publication);
-        
         return "redirect:/home";
     }
     
