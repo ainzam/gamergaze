@@ -7,9 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,24 +40,26 @@ public class ProfileController {
     }
 	
     @PostMapping("/profile/edit")
-    public String updateProfile(@ModelAttribute User user, BindingResult result,
+    public String updateProfile(@RequestParam("email") String email,
+    		@RequestParam("lastName") String lastName,
+    		@RequestParam("username") String username,
+    		@RequestParam("firstName") String firtsName,
             @Nullable @RequestParam("profileImage") MultipartFile profileImage, 
             @Nullable @RequestParam("bannerImage") MultipartFile bannerImage) throws IOException {
-        if (result.hasErrors()) {
-            return "profile";
-        }
+    	
+    	User existingUser = (User) userService.loadUserByUsername(username);
 
         if (profileImage!= null) {
         	Image image = imageService.saveImage(profileImage);
-        	user.setProfileImage(image);
+        	existingUser.setProfileImage(image);
         }
 
         if (bannerImage!= null) {
         	Image image = imageService.saveImage(bannerImage);
-        	user.setBannerImage(image);
+        	existingUser.setBannerImage(image);
         }
 
-        userService.updateUser(user,profileImage,bannerImage);
+        userService.updateUser(existingUser);
 
         return "redirect:/profile";
     }
