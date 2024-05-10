@@ -503,3 +503,42 @@ nav {
     margin: 10px 0;
     font-size: 15px;
 }
+/*---------------------------------CSS Modal-------------------------------------------------*/
+.modal-header{
+  	background: #0D0C1D;
+    color: #FFF;
+    text-shadow: 0 0 2px #F1DAC4;
+    justify-content: center
+}  
+  
+.modal-body{
+  	color: white;
+    background-color: #161B33;
+}
+  
+  .modal-footer{
+ 	background: #A69CAC;
+    color: #161B33;
+    text-shadow: 4px 1px 5px #F1DAC4;
+}
+  
+.btn-primary{
+  	--bs-btn-bg: #161B33;
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-bg: #F1DAC4;
+    --bs-btn-hover-color: #161B33;
+    --bs-btn-hover-border-color: #0D0C1D;
+}
+  
+.btn-secondary{
+  	--bs-btn-color: #fff;
+    --bs-btn-bg: #CD5C5C;
+    --bs-btn-border-color: #FFF;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #E73434;
+    --bs-btn-hover-border-color: #0D0C1D;
+}
+  
+.modal-title{
+  	font-weight: bold;
+}

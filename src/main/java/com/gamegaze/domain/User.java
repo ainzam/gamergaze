@@ -75,9 +75,6 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Image profileImage;
     
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-    private List<Publication> publications;
-    
 
 	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
 		super();

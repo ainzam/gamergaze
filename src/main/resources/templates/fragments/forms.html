@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 	<head>
+	<link rel="stylesheet" th:href="@{/css/forms.css}" href="forms.css">
 		<title>GamerGaze</title>
 		<th:block th:include="~{fragments/template:: head}"></th:block>
 	</head>
@@ -12,7 +13,7 @@
 		    <div class="modal-dialog">
 		      <div class="modal-content">
 		        <div class="modal-header">
-		          <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+		          <h5 class="modal-title" id="exampleModalLabel">EDIT YOUR PROFILE</h5>
 		        </div>
 				<form th:action="@{/profile/edit}" method="post" enctype="multipart/form-data">
 			        <div class="modal-body">
