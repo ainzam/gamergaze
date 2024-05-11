@@ -1,9 +1,10 @@
 package com.gamegaze.controllers;
 
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,29 +15,37 @@ import com.gamegaze.service.UserService;
 @Controller
 public class FollowController {
     
+	private User currentUser;
+	
     @Autowired
     private FollowService followService;
     
     @Autowired
     private UserService userService;
     
-    @PostMapping("/follow/userId")
-    public String followUser(@PathVariable Long userId, Principal principal) {
-        User currentUser = userService.getUserByUsername(principal.getName());
-        User userToFollow = userService.getUserById(userId);
+    @GetMapping("/follow/{username}")
+    public String followUser(@PathVariable String username) {
+        User userToFollow = userService.getUserByUsername(username);
+        setCurrentUser();
         
         followService.followUser(currentUser, userToFollow);
         
-        return "redirect:/users/" + userId;
+        return "redirect:/profile/" + userToFollow.getUsername();
     }
     
-    @PostMapping("/unfollow/userId")
-    public String unfollowUser(@PathVariable Long userId, Principal principal) {
-        User currentUser = userService.getUserByUsername(principal.getName());
-        User userToUnfollow = userService.getUserById(userId);
+    @GetMapping("/unfollow/{username}")
+    public String unfollowUser(@PathVariable String username) {
+    	
+        User userToUnfollow = userService.getUserByUsername(username);
         
         followService.unfollowUser(currentUser, userToUnfollow);
         
-        return "redirect:/users/" + userId;
+        return "redirect:/profile/" + userToUnfollow.getUsername();
+    }
+    
+    private void setCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        currentUser = (User) userService.loadUserByUsername(username);
     }
 }

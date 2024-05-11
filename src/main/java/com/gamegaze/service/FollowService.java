@@ -18,7 +18,7 @@ public class FollowService {
     
     
     public List<Follow> getAllFollowedByUser(User user){
-    	return followRepository.findByFollowed(user);
+    	return followRepository.findByFollower(user);
     }
     
     public void followUser(User currentUser, User userToFollow) {

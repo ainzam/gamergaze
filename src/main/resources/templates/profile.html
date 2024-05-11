@@ -22,14 +22,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="pd-right">
-				<button type="button">
+			<div class="pd-right" th:if="${user != null}">
+				<a th:href="@{'/follow/' + ${user.username}}">
 					<i class="bx bxs-user-plus"></i>Friends
-				</button>
+				</a>
 				<button type="button">
 					<i class="bx bxs-comment-dots"></i>Message
 				</button>
-				<br> <a href="#" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>
+				<br> <a href="#" th:if="${user == null}" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>
 			</div>
 		</div>
 		<div class="profile-info">
