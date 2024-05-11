@@ -78,6 +78,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Publication> publications;
     
+    @OneToMany(mappedBy = "follower")
+    private List<Follow> follows;
+
+    @OneToMany(mappedBy = "followed")
+    private List<Follow> followers;
 
 	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
 		super();
@@ -99,22 +104,12 @@ public class User implements UserDetails {
         return username;
     }
     
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public String getPassword() {
         return password;
     }
     
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
 
     @Override
     public boolean isAccountNonExpired() {

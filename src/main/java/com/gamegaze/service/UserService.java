@@ -1,6 +1,7 @@
 package com.gamegaze.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.gamegaze.domain.Publication;
+import com.gamegaze.domain.Follow;
 import com.gamegaze.domain.User;
-import com.gamegaze.repository.PublicationRepository;
 import com.gamegaze.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +31,8 @@ public class UserService implements UserDetailsService{
     private ImageService imageService;
     
     @Autowired
-    private PublicationRepository publicationRepository;
+    private FollowService followService;
+    
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -72,9 +73,30 @@ public class UserService implements UserDetailsService{
     	return userRepository.findById(id).orElse(null);
     }
     
-    public List<Publication> getPublicationsByUser(User user) {
-        return publicationRepository.findByUser(user);
+
+    public List<User> getFollowedUsersByUser(User currentUser){
+    	
+        List<User> followedUsers = new ArrayList<>();
+        
+        List<Follow> followed = followService.getAllFollowedByUser(currentUser);
+        
+
+        for (Follow follow : followed) {
+
+            if (follow.getFollowed() != null) {
+                followedUsers.add(follow.getFollowed());
+            }
+        }
+        
+        return followedUsers;
+    	
     }
+    
+    public User getUserByUsername (String username) {
+    	return userRepository.findByUsername(username).orElse(null);
+    }
+    
+    
     
 
 }

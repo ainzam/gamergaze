@@ -31,7 +31,7 @@
 					<span class="tooltip">Home</span>
 				</li>	
 				<li>
-					<a th:href="@{/profile}">
+					<a th:href="@{'/profile/' + ${currentuser.username}}">
 						<i class="bx bxs-user"></i>
 						<span class="nav-item">Profile</span>
 					</a>
@@ -82,19 +82,19 @@
 			</ul>
 		</div>
 		<nav th:fragment="nav">
-            <div class="nav-right">
-				<div class="search-box">
-					<i class="bx bxs-search" style="height: 1rem"></i>
-					<input type="text" placeholder="Search">
-				</div>
+			<div class="nav-right">
+				<form th:action="@{/searchUsername}" method="post" id="searchForm">
+			        <div class="search-box">
+			            <input type="text" name="username" placeholder="Search Username">
+			            <i class="bx bxs-search" style="height: 1rem; cursor: pointer;"></i>
+			            <input type="submit" style="display: none;">
+			        </div>
+				</form>
 			</div>
+
 			<div class="nav-left">
-				<div class="create-box">
-					<i class="bx bx-plus-medical" style="height: 1rem"></i>
-					<a th:href="@{/createPost}">New post</a>
-				</div>
 				<div class="user">
-					<img th:src="@{/images/{id}(id=${user.profileImage.id})}" src="#" alt="user-image" class="user-img">
+					<img th:src="@{/images/{id}(id=${currentuser.profileImage.id})}" src="#" alt="user-image" class="user-img">
 				</div>
 			</div>
         </nav>

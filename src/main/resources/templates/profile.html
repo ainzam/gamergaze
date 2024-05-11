@@ -8,16 +8,16 @@
 	<div th:replace="~{fragments/template :: sidebar}"></div>
 	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
 	<div class="profile-container">
-		<div class="cover-img" th:style="'background-image: url(' + @{/images/{id}(id=${user.bannerImage.id})} + ');'"></div>
+		<div class="cover-img" th:style="'background-image: url(\'/images/' + (${user != null ? user.bannerImage.id : currentuser.bannerImage.id}) + '\');'"></div>
 		<div class="profile-details">
 			<div class="pd-left">
 				<div class="pd-row">
 					<img class="pd-image"
-						th:src="@{/images/{id}(id=${user.profileImage.id})}"
+						th:src="@{/images/{id}(id=${user != null ? user.profileImage.id : currentuser.profileImage.id})}"
 						alt="Banner">
 					<div>
-						<h3><span th:text="${user.username}"></span></h3>
-						<h4><span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></h4>
+						<h3><span th:text="${user != null ? user.username : currentuser.username}"></span></h3>
+						<h4><span th:text="${user != null ? user.firstName : currentuser.firstName}"></span> <span th:text="${user != null ? user.lastName : currentuser.lastName}"></span></h4>
 						<p>120 Friends - 20 mutual</p>
 					</div>
 				</div>
@@ -59,6 +59,6 @@
 			</div>
 		</div>
 	</div>
-	<th:block th:include="~{fragments/forms :: edit-profile-modal}"></th:block>
+	<th:block th:if="${user == null}" th:include="~{fragments/forms :: edit-profile-modal}"></th:block>
 </body>
 </html>

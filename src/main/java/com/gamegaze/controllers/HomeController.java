@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.gamegaze.domain.Image;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
 import com.gamegaze.service.ImageService;
 import com.gamegaze.service.PublicationService;
 import com.gamegaze.service.UserService;
-
-import jakarta.annotation.Nullable;
 
 
 
@@ -36,17 +36,27 @@ public class HomeController {
 	@Autowired
 	private ImageService imageService;
 	
+	
 	private User currentUser;
 	
     @GetMapping("/home")
     public Model home(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		User user =(User) userService.loadUserByUsername(username);
-		model.addAttribute(user);
+    	setCurrentUser();
+		model.addAttribute("currentuser",currentUser);
 		
-		List<Publication> publications = userService.getPublicationsByUser(user);
-		model.addAttribute("publications", publications);
+		List<Publication> publications = publicationService.getPublicationsByUser(currentUser);
+		
+		List<User> usersFollowed = userService.getFollowedUsersByUser(currentUser);
+		
+		List<Publication> allPublications = new ArrayList<>();
+		
+		for(User user : usersFollowed) {
+			List<Publication> usersFollowedPublications = publicationService.getPublicationsByUser(user);
+			allPublications.addAll(usersFollowedPublications);
+		}
+		allPublications.addAll(publications);
+		
+		model.addAttribute("publications", allPublications);
 		return model;
     }
     
@@ -84,5 +94,21 @@ public class HomeController {
         currentUser = (User) userService.loadUserByUsername(username);
     }
     
+    @PostMapping("/searchUsername")
+    public ModelAndView createPost(@RequestParam("username") String username) {
+    	ModelAndView modelandview = new ModelAndView();
+    	setCurrentUser();
+    	modelandview.addObject("currentuser",currentUser);
+    	User userInPath = userService.getUserByUsername(username);
+    	
+    	if(userInPath != null) {
+    		modelandview.setViewName("searchUsername");
+    		modelandview.addObject(userInPath);
+    	}else {
+    		modelandview.setViewName("userNotFound");
+    	}
+
+    	return modelandview;
+    }
 	
 }
