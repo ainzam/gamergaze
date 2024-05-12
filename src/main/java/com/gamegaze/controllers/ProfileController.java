@@ -36,6 +36,13 @@ public class ProfileController {
 	@Autowired
 	private ImageService imageService;
 	
+	@GetMapping("/profile")
+	public String profileroot() {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String currentUsername = authentication.getName();
+		return "redirect:/profile/" + currentUsername;
+	}
+	
 	@GetMapping("/profile/{username}")
 	public ModelAndView profile(@PathVariable String username) {
 	    User userInPath = userService.getUserByUsername(username);

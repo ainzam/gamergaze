@@ -39,6 +39,7 @@ public class HomeController {
 	
 	private User currentUser;
 	
+	
     @GetMapping("/home")
     public Model home(Model model) {
     	setCurrentUser();

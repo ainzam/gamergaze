@@ -20,7 +20,7 @@ public class LoginController {
 	
 	@GetMapping(value = "/")
 	public String root(HttpServletRequest request) throws ServletException, IOException {
-		return "home";
+		return "redirect:/home";
 	}
 
 	@GetMapping(value = "/loginfailed")
