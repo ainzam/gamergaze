@@ -22,8 +22,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="pd-right" th:if="${user != null}">
-				<a th:href="@{'/follow/' + ${user.username}}">
+			<div class="pd-right">
+				<a th:href="@{'/follow/' + ${currentuser.username}}">
 					<i class="bx bxs-user-plus"></i>Friends
 				</a>
 				<button type="button">

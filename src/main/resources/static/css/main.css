@@ -560,6 +560,7 @@ nav {
     background-color: #0D0C1D;
     resize: none; /* Para evitar que se pueda redimensionar */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
 }
 
 .post form .user-profile {
