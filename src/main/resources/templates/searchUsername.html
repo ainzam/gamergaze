@@ -10,7 +10,31 @@
 	<div class="main-content">
 		<div class="postContainer">
 			<div class="post">
-				
+				<div class="profile-details">
+					<div class="pd-left">
+						<div class="pd-row">
+						<a th:href="@{'/profile/' + ${userfound.username}}">
+							<img class="pd-image"
+								th:src="@{/images/{id}(id=${userfound.profileImage.id})}"
+								alt="Banner">
+						</a>
+							<div>
+								<h3><span th:text="${userfound.username}"></span></h3>
+								<h4><span th:text="${userfound.firstName}"></span> <span th:text="${userfound.lastName}"></span></h4>
+								<p>120 Friends - 20 mutual</p>
+							</div>
+						</div>
+					</div>
+					<div class="pd-right" th:if="${!isFollowing}">
+						<a th:href="@{'/follow/' + ${userfound.username}}">
+							<i class="bx bxs-user-plus"></i>Friends
+						</a>
+						<button type="button">
+							<i class="bx bxs-comment-dots"></i>Message
+						</button>
+						<br> <a href="#" th:if="${userfound == null}" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

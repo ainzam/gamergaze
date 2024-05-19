@@ -22,7 +22,7 @@ public class PublicationService {
     }
 	
     public List<Publication> getPublicationsByUser(User user) {
-        return publicationRepository.findByUser(user);
+        return publicationRepository.findByUserOrderByCreatedAt(user);
     }
     
 }

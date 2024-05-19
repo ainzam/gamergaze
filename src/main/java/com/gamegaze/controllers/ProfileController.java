@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gamegaze.domain.Image;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
+import com.gamegaze.service.FollowService;
 import com.gamegaze.service.ImageService;
 import com.gamegaze.service.PublicationService;
 import com.gamegaze.service.UserService;
@@ -36,8 +37,18 @@ public class ProfileController {
 	@Autowired
 	private ImageService imageService;
 	
-	@GetMapping("/profile")
+	@Autowired
+	private FollowService followService;
+	
+	@GetMapping("/profile/")
 	public String profileroot() {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String currentUsername = authentication.getName();
+		return "redirect:/profile/" + currentUsername;
+	}
+	
+	@GetMapping("/profile")
+	public String profileroo() {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUsername = authentication.getName();
 		return "redirect:/profile/" + currentUsername;
@@ -53,10 +64,11 @@ public class ProfileController {
 
 	    List<Publication> publications = new ArrayList<>();
 	    ModelAndView modelAndView = new ModelAndView();
-
+	    boolean isFollowing = true;
 	    if (userInPath != null && !userInPath.getUsername().equals(currentUser.getUsername())) {
 	    	modelAndView.setViewName("profile");
-	    	modelAndView.addObject("user",userInPath);
+	    	modelAndView.addObject("user",userInPath);    		
+	    	isFollowing = followService.isFollowing(currentUser, userInPath);
 	        publications.addAll(publicationService.getPublicationsByUser(userInPath));
 	    } else if (userInPath == null) {
 	        modelAndView.setViewName("userNotFound");
@@ -64,6 +76,7 @@ public class ProfileController {
 	    } else {
 	        publications.addAll(publicationService.getPublicationsByUser(currentUser));
 	    }
+    	modelAndView.addObject("isFollowing", isFollowing);
     	modelAndView.addObject("currentuser",currentUser);
 	    modelAndView.addObject("publications", publications);
 	    modelAndView.setViewName("profile");

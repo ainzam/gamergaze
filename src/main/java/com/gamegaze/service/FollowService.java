@@ -36,4 +36,10 @@ public class FollowService {
             followRepository.delete(follow);
         }
     }
+    
+    public boolean isFollowing(User currentUser, User userToCheck) {
+        Follow follow = followRepository.findByFollowerAndFollowed(currentUser, userToCheck);
+        return follow != null;
+    }
+    
 }

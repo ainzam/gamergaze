@@ -36,9 +36,11 @@
 				    </a>
 			    </div>
 			    <p class="post-text" th:text="${publication.textContent}"></p>
-			    <div class="post-img" th:each="image : ${publication.images}">
-			        <img th:src="@{/images/{id}(id=${image.id})}" alt="Publication Image">
-			    </div>
+				<div th:if="${publication.images.size() > 0}">
+				    <div class="post-img" th:each="image : ${publication.images}">
+				        <img th:src="@{/images/{id}(id=${image.id})}" th:alt="${publication.images.size()}">
+				    </div>
+				</div>
 			</div>
 		</div>
 		<div class="leftContainer">

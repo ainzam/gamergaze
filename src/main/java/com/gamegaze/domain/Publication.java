@@ -32,7 +32,7 @@ public class Publication {
 
     private String textContent;
 
-    @Column(name = "created_at")
+    @Column(name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 

@@ -2,6 +2,7 @@ package com.gamegaze.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gamegaze.domain.Image;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
+import com.gamegaze.service.FollowService;
 import com.gamegaze.service.ImageService;
 import com.gamegaze.service.PublicationService;
 import com.gamegaze.service.UserService;
 
-
+import jakarta.annotation.Nullable;
 
 @Controller
 public class HomeController {
@@ -35,6 +37,9 @@ public class HomeController {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private FollowService followService;
 	
 	
 	private User currentUser;
@@ -56,26 +61,30 @@ public class HomeController {
 			allPublications.addAll(usersFollowedPublications);
 		}
 		allPublications.addAll(publications);
-		
+		allPublications.sort((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt()));
 		model.addAttribute("publications", allPublications);
 		return model;
     }
     
     @PostMapping("/createPublication")
-    public String createPost(@RequestParam("textContent") String textContent, @RequestParam("images") MultipartFile[] images) throws IOException {
+    public String createPost(@RequestParam("textContent") String textContent,@Nullable @RequestParam("images") MultipartFile[] images) throws IOException {
         setCurrentUser();
         Publication publication = new Publication();
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
+        publication.setCreatedAt(new Date());
 
         List<Image> imagespost = new ArrayList<>();
 
         if (images!= null && images.length > 0) {
             for (MultipartFile image : images) {
                 try {
-                    Image imgsave = imageService.saveImage(image);
-                    imagespost.add(imgsave);
-                    System.out.println("Image saved successfully: {}");
+                	if (!image.isEmpty()) {
+	                    Image imgsave = imageService.saveImage(image);
+	                    imagespost.add(imgsave);
+	                    publication.setImages(imagespost);
+	                    System.out.println("Image saved successfully: {}");
+                	}
                 } catch (Exception e) {
                 	System.out.println("Error saving image: {}");
                 }
@@ -84,7 +93,7 @@ public class HomeController {
         	System.out.println("No images provided");
         }
 
-        publication.setImages(imagespost);
+ 
         publicationService.savePublication(publication);
         return "redirect:/home";
     }
@@ -104,7 +113,9 @@ public class HomeController {
     	
     	if(userInPath != null) {
     		modelandview.setViewName("searchUsername");
-    		modelandview.addObject(userInPath);
+    		modelandview.addObject("userfound",userInPath);
+    		boolean isFollowing = followService.isFollowing(currentUser, userInPath);
+    	    modelandview.addObject("isFollowing", isFollowing);
     	}else {
     		modelandview.setViewName("userNotFound");
     	}
