@@ -629,3 +629,45 @@ nav {
 .post form button[type="submit"]:hover {
     background-color: #161B33;
 }
+/*css chat page ------------------------------------------------------*/
+#chatBox {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#messageArea {
+    list-style-type: none;
+    padding: 0;
+}
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.you {
+    background-color: #0D0C1D;
+    color: #fff;
+    text-align: right;
+}
+.recipient {
+    background-color: #F1DAC4;
+    color: #0D0C1D;
+    text-align: left;
+}
+#message {
+    width: calc(100% - 100px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#sendButton {
+    padding: 10px 20px;
+    background-color: #0D0C1D;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

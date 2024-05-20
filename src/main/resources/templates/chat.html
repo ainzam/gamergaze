@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
+    <th:block th:include="~{fragments/template:: head}"></th:block>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
     <script>
@@ -39,7 +40,9 @@
             var messageArea = document.getElementById("messageArea");
             var messageElement = document.createElement("li");
 
-            messageElement.className = "chat-message";
+            var messageClass = message.senderId == document.getElementById("currentUserId").value ? "you" : "recipient";
+            messageElement.className = "chat-message " + messageClass;
+
             var avatarElement = document.createElement("i");
             avatarElement.appendChild(document.createTextNode(message.senderId == document.getElementById("currentUserId").value ? 'You' : 'Recipient'));
             messageElement.appendChild(avatarElement);
@@ -52,6 +55,7 @@
         }
 
 
+
         document.addEventListener("DOMContentLoaded", function () {
             connect();
             document.getElementById("sendButton").addEventListener("click", sendMessage);
@@ -59,18 +63,21 @@
     </script>
 </head>
 <body>
-    <div>
-        <h1>Chat with <span th:text="${recipientUsername}"></span></h1>
-        <ul id="messageArea">
-            <li th:each="message : ${messages}" class="chat-message">
-                <i th:text="${message.senderId == currentUserId} ? 'You' : 'Recipient'"></i>
-                <p th:text="${message.content}"></p>
-            </li>
-        </ul>
-        <input type="text" id="message" placeholder="Type your message here..."/>
-        <button id="sendButton">Send</button>
-        <input type="hidden" id="currentUserId" th:value="${currentUserId}" />
-        <input type="hidden" id="recipientId" th:value="${recipientId}" />
-    </div>
+	<div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+   	<div class="main-content">
+	    <div id="chatBox">
+	        <h1>Chat with <span th:text="${recipientUsername}"></span></h1>
+	        <ul id="messageArea">
+	            <li th:each="message : ${messages}" th:class="${message.senderId == currentUserId} ? 'chat-message you' : 'chat-message recipient'">
+	                <p th:text="${message.content}"></p>
+	            </li>
+	        </ul>
+	        <input type="text" id="message" placeholder="Type your message here..."/>
+	        <button id="sendButton">Send</button>
+	        <input type="hidden" id="currentUserId" th:value="${currentUserId}" />
+	        <input type="hidden" id="recipientId" th:value="${recipientId}" />
+	    </div>
+	</div>
 </body>
 </html>

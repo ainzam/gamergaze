@@ -36,6 +36,7 @@ public class ChatController {
 		public String chat(Model model, @PathVariable Long recipientId) {
 			model.addAttribute("recipientId", recipientId);
 			setCurrentUser();
+			model.addAttribute("currentuser",currentUser);
 			model.addAttribute("recipientUsername", userService.getUserById(recipientId).getUsername());
 			model.addAttribute("messages", chatService.getMessages(recipientId, currentUser.getId()));
 			model.addAttribute("currentUserId", currentUser.getId());
