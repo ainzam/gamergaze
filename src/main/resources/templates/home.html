@@ -16,12 +16,10 @@
 							alt="User Profile Image"> <span th:text="${currentuser.username}">Username</span>
 					</div>
 					<textarea name="textContent" placeholder="Write something..."></textarea>
-					<div class="post-img">
-					    <label for="file-upload" class="custom-file-upload">
-					        <i class='bx bxs-file-image'></i>
-					    </label>
-					    <input id="file-upload" type="file" name="images" multiple style="display: none;">
-					</div>
+				    <label for="file-upload" class="custom-file-upload">
+				        <i class='bx bxs-file-image'></i>
+				    </label>
+				    <input id="file-upload" type="file" name="images" multiple style="display: none;">
 					<button type="submit">Create Publication</button>
 				</form>
 			</div>
@@ -29,16 +27,14 @@
 			    <div class="user-profile">
 			    	<a th:href="@{'/profile/' + ${publication.user.username}}">
 				        <img th:src="@{/images/{id}(id=${publication.user.profileImage.id})}" alt="User Profile Image">
-				        <div>
-				            <p th:text="${publication.user.username}"></p>
-				            <span th:text="${#dates.format(publication.createdAt, 'dd MMMM yyyy')}"></span>
-				        </div>
+				        <span th:text="${publication.user.username}"></span><br>
+				        <span th:text="${#dates.format(publication.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
 				    </a>
 			    </div>
 			    <p class="post-text" th:text="${publication.textContent}"></p>
 				<div th:if="${publication.images.size() > 0}">
 				    <div class="post-img" th:each="image : ${publication.images}">
-				        <img th:src="@{/images/{id}(id=${image.id})}" th:alt="${publication.images.size()}">
+				        <img class="post-img-item" th:src="@{/images/{id}(id=${image.id})}" th:alt="${publication.images.size()}">
 				    </div>
 				</div>
 			</div>

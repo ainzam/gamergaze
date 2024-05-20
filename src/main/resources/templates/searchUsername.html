@@ -10,7 +10,6 @@
 	<div class="main-content">
 		<div class="postContainer">
 			<div class="post">
-				<div class="profile-details">
 					<div class="pd-left">
 						<div class="pd-row">
 						<a th:href="@{'/profile/' + ${userfound.username}}">
@@ -26,15 +25,14 @@
 						</div>
 					</div>
 					<div class="pd-right" th:if="${!isFollowing}">
-						<a th:href="@{'/follow/' + ${userfound.username}}">
+						<a th:href="@{'/follow/' + ${userfound.username}}" th:if="${currentuser.id} != ${userfound.id}">
 							<i class="bx bxs-user-plus"></i>Friends
 						</a>
-						<button type="button">
+						<button type="button" th:if="${currentuser.id} != ${userfound.id}">
 							<i class="bx bxs-comment-dots"></i>Message
 						</button>
 						<br> <a href="#" th:if="${userfound == null}" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>

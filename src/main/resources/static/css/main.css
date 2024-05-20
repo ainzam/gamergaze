@@ -307,6 +307,12 @@ nav {
     color: #0D0C1D;
 }
 
+.user-profile a{
+    font-size: 13px;
+    color: #0D0C1D;
+    text-decoration: none;
+}
+
 .post-text{
     color: #0D0C1D;
     margin: 15px 0;
@@ -321,6 +327,14 @@ nav {
     width: 100%;
     border-radius: 4px;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+}
+.post-img-item{
+	max-width: 100%; /* Ancho máximo igual al 100% del contenedor padre */
+    max-height: 300px; /* Altura máxima deseada */
+    overflow: hidden;
+    border-radius: 6px;
 }
 
 .events{
