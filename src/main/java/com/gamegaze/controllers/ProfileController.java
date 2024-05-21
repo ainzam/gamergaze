@@ -40,6 +40,8 @@ public class ProfileController {
 	@Autowired
 	private FollowService followService;
 	
+	private User currentUser;
+	
 	@GetMapping("/profile/")
 	public String profileroot() {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -86,12 +88,12 @@ public class ProfileController {
     @PostMapping("/profile/edit")
     public String updateProfile(@RequestParam("email") String email,
     		@RequestParam("lastName") String lastName,
-    		@RequestParam("username") String username,
     		@RequestParam("firstName") String firstName,
             @Nullable @RequestParam("profileImage") MultipartFile profileImage, 
             @Nullable @RequestParam("bannerImage") MultipartFile bannerImage) throws IOException {
     	
-    	User existingUser = (User) userService.loadUserByUsername(username);
+    	setCurrentUser();
+    	User existingUser = currentUser;
 
     	if (email!= null &&!email.isEmpty()) {
             existingUser.setEmail(email);
@@ -120,6 +122,12 @@ public class ProfileController {
 	    User currentUser = (User) userService.loadUserByUsername(currentUsername);
 
         return "redirect:/profile/" + currentUser.getUsername();
+    }
+    
+    private void setCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        currentUser = (User) userService.loadUserByUsername(username);
     }
     
 }

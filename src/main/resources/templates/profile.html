@@ -18,13 +18,16 @@
 					<div>
 						<h3><span th:text="${user != null ? user.username : currentuser.username}"></span></h3>
 						<h4><span th:text="${user != null ? user.firstName : currentuser.firstName}"></span> <span th:text="${user != null ? user.lastName : currentuser.lastName}"></span></h4>
-						<p>120 Friends - 20 mutual</p>
+						<p><span th:text="${user != null ? user.followers.size() : currentuser.followers.size()}"></span> Followers</p>
 					</div>
 				</div>
 			</div>
 			<div class="pd-right">
-				<a th:if="${!isFollowing}" th:href="@{'/follow/' + ${currentuser.username}}">
+				<a th:if="${!isFollowing}" th:href="@{'/follow/' + ${user != null ? user.username : currentuser.username}}">
 					<i class="bx bxs-user-plus"></i>Friends
+				</a>
+				<a th:href="@{'/unfollow/' + ${user != null ? user.username : currentuser.username}}" th:if="${isFollowing and user != null}">
+					<i class="bx bxs-user-plus"></i>Unfollow
 				</a>
 				<a th:if="${user != null}"  th:href="@{/chat/{recipientId}(recipientId=${user.id})}">
 				    <i class="bx bxs-comment-dots"></i>Message
@@ -54,6 +57,15 @@
 					    <div class="post-img" th:each="image : ${publication.images}">
 					        <img class="post-img-item"th:src="@{/images/{id}(id=${image.id})}" alt="Publication Image">
 					    </div>
+						<div class="postButtons">
+		                    <div class="likeButton" th:id="${publication.id}">
+		                        <i class='bx bxs-heart bx-sm'></i>
+		                        <span th:text="${publication.likes}"></span>
+		                    </div>
+		                    <div class="commentButton">
+		                        <i class='bx bxs-message-rounded-add bx-sm'></i>
+		                    </div>
+		                </div>
 					</div>
 				</div>
 			</div>

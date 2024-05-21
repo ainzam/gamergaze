@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>GamerGaze</title>
+<th:block th:include="~{fragments/template:: head}"></th:block>
+</head>
+<body>
+	<div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+	<div class="main-content">
+		<div class="chatsTitle">
+			<h2>Chats from users followed</h2>
+			<img src="https://scontent-bcn1-1.cdninstagram.com/v/t39.30808-6/438817863_18433614598011236_1229096382602310152_n.jpg?stp=dst-jpg_e35_p720x720&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDMzeDE3ODYuc2RyLmYzMDgwOCJ9&_nc_ht=scontent-bcn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=9AWhRZl8PEUQ7kNvgE-jDny&edm=ACOOH6wAAAAA&ccb=7-5&ig_cache_key=MzM1NDQzODg4MzExMjY5NzY0Nw%3D%3D.2-ccb7-5&oh=00_AYBDoUTljRPUQg-GrOFhXnUeGyzZkq26qJObxP4lJiLq2A&oe=66527C3A&_nc_sid=aa4e97">
+		</div>
+        <div class="postContainer">
+	        <div th:each="user : ${users}" class="post">
+	            <div class="user-profile">
+	            	<img th:src="@{/images/{id}(id=${user.profileImage.id})}" alt="User Profile Image">
+	            	<a th:href="@{/chat/{recipientId}(recipientId=${user.id})}">
+		            	<span th:text="${user.username}"></span>
+		            	<div class="lastMessage">
+		            		<span th:text="${userLastMessages.get(user.id)}"></span>
+		            	</div>
+	            	</a>
+	            </div>
+	        </div>
+        </div>
+	</div>
+</body>
+</html>

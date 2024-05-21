@@ -21,4 +21,10 @@ public class ChatService {
     public List<Message> getMessages(Long senderId, Long recipientId) {
         return messageRepository.findBySenderIdAndRecipientIdOrSenderIdAndRecipientIdOrderByTimestamp(senderId, recipientId,recipientId,senderId);
     }
+    
+    public Message getLastMessageBetweenUsers(Long userId1, Long userId2) {
+        return messageRepository.findTopBySenderIdAndRecipientIdOrSenderIdAndRecipientIdOrderByTimestampDesc(
+            userId1, userId2, userId2, userId1
+        ).orElse(null);
+    }
 }

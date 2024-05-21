@@ -13,9 +13,9 @@ ol, ul{
 /* css de sidebar de nav ------------------------------------------------------*/
 
 .user-img{
-    width: 50px;
+	width: 50px;
+    height: 50px;
     border-radius: 100%;
-    border: 1px solid #eee;
 }
 
 .sidebar {
@@ -297,9 +297,10 @@ nav {
 }
 
 .user-profile img{
-    width: 45px;
-    border-radius: 50%;
     margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
 }
 
 .user-profile span{
@@ -335,6 +336,30 @@ nav {
     max-height: 300px; /* Altura máxima deseada */
     overflow: hidden;
     border-radius: 6px;
+}
+
+.postButtons{
+	display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.likeButton{
+	display: flex;
+    align-items: center;
+}
+.commentButton{
+	display: flex;
+    align-items: center;
+}
+
+.likeButton:hover{
+	color: red;
+	cursor: pointer;
+}
+.commentButton:hover{
+	color: aliceblue;
+	cursor: pointer;
 }
 
 .events{
@@ -670,4 +695,18 @@ nav {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.lastMessage{
+	width: 100%;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.chatsTitle{
+	background: #F1DAC4;
+    border-radius: 6px;
+    margin: 20px 0;
+    padding: 20px;
+    color: #0D0C1D;
+    box-shadow: 8px 8px 0px 0px #A69CAC;
 }

@@ -1,6 +1,9 @@
 package com.gamegaze.controllers;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -42,7 +45,26 @@ public class ChatController {
 			model.addAttribute("currentUserId", currentUser.getId());
 			return "chat";
 		}
-
+		
+		@GetMapping("/chats")
+		public String chats(Model model) {
+			setCurrentUser();
+			List<User> users = userService.getFollowedUsersByUser(currentUser);
+			Map<Long, String> userLastMessages = new HashMap<>();
+		    for (User user : users) {
+		        Message lastMessage = chatService.getLastMessageBetweenUsers(currentUser.getId(), user.getId());
+		        if(lastMessage != null) {
+		        	userLastMessages.put(user.getId(), lastMessage.getContent());
+		        }else {
+		        	userLastMessages.put(user.getId(), "No messages yet");
+		        }
+		    }
+		    model.addAttribute("userLastMessages", userLastMessages);
+		    model.addAttribute("users",users);
+			model.addAttribute("currentuser",currentUser);
+			return "chats";
+		}
+		
 		@MessageMapping("/chat")
 		public void sendMessage(@Payload Message message) {
 			message.setTimestamp(new Date());

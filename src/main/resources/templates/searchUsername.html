@@ -20,17 +20,20 @@
 							<div>
 								<h3><span th:text="${userfound.username}"></span></h3>
 								<h4><span th:text="${userfound.firstName}"></span> <span th:text="${userfound.lastName}"></span></h4>
-								<p>120 Friends - 20 mutual</p>
+								<p><span th:text="${userfound.followers.size()}"></span> Followers</p>
 							</div>
 						</div>
 					</div>
-					<div class="pd-right" th:if="${!isFollowing}">
-						<a th:href="@{'/follow/' + ${userfound.username}}" th:if="${currentuser.id} != ${userfound.id}">
-							<i class="bx bxs-user-plus"></i>Friends
+					<div class="pd-right">
+						<a th:href="@{'/follow/' + ${userfound.username}}" th:if="${!isFollowing and currentuser.id != userfound.id}">
+							<i class="bx bxs-user-plus"></i>Follow
 						</a>
-						<button type="button" th:if="${currentuser.id} != ${userfound.id}">
+						<a th:href="@{'/unfollow/' + ${userfound.username}}" th:if="${isFollowing and currentuser.id != userfound.id}">
+							<i class="bx bxs-user-plus"></i>Unfollow
+						</a>
+						<a th:if="${currentuser.id} != ${userfound.id}" th:href="@{/chat/{recipientId}(recipientId=${userfound.id})}">
 							<i class="bx bxs-comment-dots"></i>Message
-						</button>
+						</a>
 						<br> <a href="#" th:if="${userfound == null}" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>
 					</div>
 			</div>

@@ -14,5 +14,22 @@ window.onload=function(){
         var searchForm = document.getElementById("searchForm");
         searchForm.submit();
     });
+    
+    $(".likeButton").click(function() {
+        var publicationId = $(this).attr("id");
+        var likeCountSpan = $(this).find("span");
+
+        $.ajax({
+            url: "/publications/" + publicationId + "/like",
+            type: "GET",
+            success: function(data) {
+                likeCountSpan.text(data);
+            },
+            error: function(error) {
+                console.log("Error:", error);
+            }
+        });
+    });
+    
 		
 };

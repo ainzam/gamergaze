@@ -33,7 +33,7 @@ public class FollowController {
     
     @GetMapping("/unfollow/{username}")
     public String unfollowUser(@PathVariable String username) {
-    	
+    	setCurrentUser();
         User userToUnfollow = userService.getUserByUsername(username);
         
         followService.unfollowUser(currentUser, userToUnfollow);
