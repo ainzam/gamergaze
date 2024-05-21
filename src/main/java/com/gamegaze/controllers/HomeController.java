@@ -122,5 +122,15 @@ public class HomeController {
 
     	return modelandview;
     }
+    
+    @GetMapping("/following")
+    public String following(Model model) {
+		setCurrentUser();
+		List<User> users = userService.getFollowedUsersByUser(currentUser);
+		model.addAttribute("users",users);
+		model.addAttribute("currentuser",currentUser);
+		
+		return "following";
+    }
 	
 }
