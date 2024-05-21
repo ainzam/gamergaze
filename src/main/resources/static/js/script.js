@@ -31,5 +31,10 @@ window.onload=function(){
         });
     });
     
+    $(".commentButton").click(function() {
+	    var publicationId = $(this).closest(".post").find(".likeButton").attr("id");
+	    window.location.href = "/publications/" + publicationId + "/post";
+	});
+    
 		
 };
