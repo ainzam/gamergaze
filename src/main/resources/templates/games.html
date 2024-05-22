@@ -1,76 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/main.css}" href="games.css">
-    <title>Galería de Imágenes</title>
-    <style>
-        
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/games.css}" href="games.css">
+<title>Games</title>
+<th:block th:include="~{fragments/template:: head}"></th:block>
+<style>
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>GAMES</h2>
-        <div class="row">
-            <div class="column">
-                <img src="imagen1.jpg" alt="Imagen 1">
-                <div class="overlay">
-                    <div class="overlay-content">Tom Clancy's Rainbow 6 Siege</div>
-                </div>
-            </div>
-            <div class="column">
-                <img src="imagen2.jpg" alt="Imagen 2">
-                <div class="overlay">
-                    <div class="overlay-content">Call of Duty: Modern Warfare 2</div>
-                </div>
-            </div>
-            <div class="column">
-                <img src="imagen3.jpg" alt="Imagen 3">
-                <div class="overlay">
-                    <div class="overlay-content">League of Legends</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <img src="imagen4.jpg" alt="Imagen 4">
-                <div class="overlay">
-                    <div class="overlay-content">Valorant</div>
-                </div>
-            </div>
-            <div class="column">
-                <img src="imagen5.jpg" alt="Imagen 5">
-                <div class="overlay">
-                    <div class="overlay-content">The Last Of Us Part: 1</div>
-                </div>
-            </div>
-            <div class="column">
-                <img src="imagen6.jpg" alt="Imagen 6">
-                <div class="overlay">
-                    <div class="overlay-content">The Last Of Us Part: 2</div>
-                </div>
-            </div>
-        </div><div class="row">
-            <div class="column">
-                <img src="imagen7.jpg" alt="Imagen 4">
-                <div class="overlay">
-                    <div class="overlay-content">Hello Kitty Online</div>
-                </div>
-            </div>
-            <div class="column">
-                <img src="imagen8.jpg" alt="Imagen 5">
-                <div class="overlay">
-                    <div class="overlay-content">Cyberpunk 2077</div>
-                </div>
-            </div>
-            <div class="column">
-                <img src="imagen9.jpg" alt="Imagen 6">
-                <div class="overlay">
-                    <div class="overlay-content">Baldur's Gate 3</div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+	<div class="main-content">
+	<div class="container">
+		<h2>GAMES</h2>
+		<div class="row">
+			<div class="column">
+				<img th:src="@{/assets/imagen1.jpg}" alt="Imagen 1">
+				<div class="overlay">
+					<div class="overlay-content">Tom Clancy's Rainbow 6 Siege</div>
+				</div>
+			</div>
+			<div class="column">
+				<img th:src="@{/assets/imagen2.jpg}" alt="Imagen 2">
+				<div class="overlay">
+					<div class="overlay-content">Call of Duty: Modern Warfare 2</div>
+				</div>
+			</div>
+			<div class="column">
+				<img th:src="@{/assets/imagen3.jpg}" alt="Imagen 3">
+				<div class="overlay">
+					<div class="overlay-content">League of Legends</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<img th:src="@{/assets/imagen4.jpg}" alt="Imagen 4">
+				<div class="overlay">
+					<div class="overlay-content">Valorant</div>
+				</div>
+			</div>
+			<div class="column">
+				<img th:src="@{/assets/imagen5.jpg}" alt="Imagen 5">
+				<div class="overlay">
+					<div class="overlay-content">The Last Of Us Part: 1</div>
+				</div>
+			</div>
+			<div class="column">
+				<img th:src="@{/assets/imagen6.jpg}" alt="Imagen 6">
+				<div class="overlay">
+					<div class="overlay-content">The Last Of Us Part: 2</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<img th:src="@{/assets/imagen7.jpg}" alt="Imagen 4">
+				<div class="overlay">
+					<div class="overlay-content">Hello Kitty Online</div>
+				</div>
+			</div>
+			<div class="column">
+				<img th:src="@{/assets/imagen8.jpg}" alt="Imagen 5">
+				<div class="overlay">
+					<div class="overlay-content">Cyberpunk 2077</div>
+				</div>
+			</div>
+			<div class="column">
+				<img th:src="@{/assets/imagen9.jpg}" alt="Imagen 6">
+				<div class="overlay">
+					<div class="overlay-content">Baldur's Gate 3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 </body>
 </html>

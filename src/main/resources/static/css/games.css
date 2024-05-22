@@ -1,68 +1,60 @@
+#container{
+	max-width: 900px;
+}
+
 body {
-            font-family: Tahoma, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #0D0C1D; /* Rich Black */
-            color: #474973;
-        }
+	font-family: Tahoma, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: #0D0C1D; /* Rich Black */
+	color: #474973;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #F1DAC4; /* Almond */
-            border-radius: 10px;
-        }
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #F1DAC4; /* Almond */
+	border-radius: 10px;
+}
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-bottom: 20px;
+}
 
-        .column {
-            flex: 0 0 calc(33.33% - 20px);
-            margin: 10px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
+.column {
+	flex: 0 0 calc(33.33% - 20px);
+	margin: 10px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 10px;
+	transition: transform 0.3s ease;
+}
 
-        .column img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+.column img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
 
-        .column:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0px 2px 3px #474973;
-            background-color: #474973;
-        }
+.column:hover {
+	transform: scale(1.1);
+}
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-           /*background-color: rgba(71, 73, 115, 0.80); /* Ultra Violet con transparencia */
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-        }
-
-       /* .column:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay-content {
-            color: #FFFFFF; 
-            text-align: ;
-        }*/
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+}

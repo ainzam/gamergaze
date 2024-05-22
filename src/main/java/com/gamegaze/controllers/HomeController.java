@@ -132,5 +132,15 @@ public class HomeController {
 		
 		return "following";
     }
+    
+    @GetMapping("/games")
+    public String games(Model model) {
+		setCurrentUser();
+		List<User> users = userService.getFollowedUsersByUser(currentUser);
+		model.addAttribute("users",users);
+		model.addAttribute("currentuser",currentUser);
+		
+		return "games";
+    }
 	
 }
