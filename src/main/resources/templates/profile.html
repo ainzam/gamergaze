@@ -23,13 +23,13 @@
 				</div>
 			</div>
 			<div class="pd-right">
-				<a th:if="${!isFollowing}" th:href="@{'/follow/' + ${user != null ? user.username : currentuser.username}}">
+				<a class="btn btnFollow" th:if="${!isFollowing}" th:href="@{'/follow/' + ${user != null ? user.username : currentuser.username}}">
 					<i class="bx bxs-user-plus"></i>Friends
 				</a>
-				<a th:href="@{'/unfollow/' + ${user != null ? user.username : currentuser.username}}" th:if="${isFollowing and user != null}">
+				<a class="btn btnUnfollow" th:href="@{'/unfollow/' + ${user != null ? user.username : currentuser.username}}" th:if="${isFollowing and user != null}">
 					<i class="bx bxs-user-plus"></i>Unfollow
 				</a>
-				<a th:if="${user != null}"  th:href="@{/chat/{recipientId}(recipientId=${user.id})}">
+				<a class="btn btnMessage" th:if="${user != null}"  th:href="@{/chat/{recipientId}(recipientId=${user.id})}">
 				    <i class="bx bxs-comment-dots"></i>Message
 				</a>
 				<br> <a href="#" th:if="${user == null}" data-bs-toggle="modal" data-bs-target="#edit-profile-modal"><i class='bx bxs-edit-alt'></i></a>

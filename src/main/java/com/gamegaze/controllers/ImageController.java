@@ -1,5 +1,4 @@
 package com.gamegaze.controllers;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gamegaze.domain.Image;
 import com.gamegaze.service.ImageService;
@@ -22,11 +18,6 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
     
-    @PostMapping("/uploadImage")
-    public String uploadImage(@RequestParam("image") MultipartFile image) throws IOException {
-        imageService.saveImage(image);
-        return "redirect:/images";
-    }
     
     @GetMapping("/images")
     public String showImages(Model model) {

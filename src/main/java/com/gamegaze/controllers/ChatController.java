@@ -31,7 +31,7 @@ public class ChatController {
 	    private ChatService chatService;
 
 	    @Autowired
-	    private SimpMessagingTemplate messagingTemplate; // Inject SimpMessagingTemplate
+	    private SimpMessagingTemplate messagingTemplate;
 
 		private User currentUser;
 	    

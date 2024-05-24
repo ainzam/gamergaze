@@ -332,8 +332,8 @@ nav {
     justify-content: center;
 }
 .post-img-item{
-	max-width: 100%; /* Ancho máximo igual al 100% del contenedor padre */
-    max-height: 300px; /* Altura máxima deseada */
+	max-width: 100%;
+    max-height: 300px;
     overflow: hidden;
     border-radius: 6px;
 }
@@ -582,7 +582,7 @@ nav {
   	font-weight: bold;
 }
 
-/* Estilo para el formulario de creación de publicación */
+/* Estilo para el formulario de creación de publicación ------------------------------------------------*/
 .post form {
     margin: auto;
     padding: 20px;
@@ -597,7 +597,7 @@ nav {
     border: none;
     border-radius: 6px;
     background-color: #0D0C1D;
-    resize: none; /* Para evitar que se pueda redimensionar */
+    resize: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
 }
@@ -710,3 +710,17 @@ nav {
     color: #0D0C1D;
     box-shadow: 8px 8px 0px 0px #A69CAC;
 }
+
+/*Botones seguir y follow/unfollow-------------------------------------*/
+.btnFollow:hover{
+	background-color: #A69CAC;
+}
+
+.btnUnfollow:hover{
+	background-color: #FF0000;
+}
+
+.btnMessage:hover{
+	background-color: #A69CAC;
+}
+
