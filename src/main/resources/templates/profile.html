@@ -50,7 +50,7 @@
 					        <img th:src="@{/images/{id}(id=${publication.user.profileImage.id})}" alt="User Profile Image">
 					        <div>
 					            <p th:text="${publication.user.username}"></p>
-					            <span th:text="${#dates.format(publication.createdAt, 'dd MMMM yyyy')}"></span>
+					            <span th:text="${#dates.format(publication.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
 					        </div>
 					    </div>
 					    <p class="post-text" th:text="${publication.textContent}"></p>

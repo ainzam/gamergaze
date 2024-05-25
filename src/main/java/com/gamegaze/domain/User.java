@@ -28,6 +28,8 @@ import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,23 +49,26 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotBlank(message = "First name cannot be blank")
     @Column(name = "firstName")
     private String firstName;
 
-    @NotBlank(message = "El apellido no puede estar vacío")
+    @NotBlank(message = "Last name cannot be blank")
     @Column(name = "lastName")
     private String lastName;
-    
-    @NotBlank(message = "El username no puede estar vacío")
+
+    @NotBlank(message = "Username cannot be blank")
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     @Column(name = "username")
     private String username;
 
-    @NotBlank(message = "El correo electrónico no puede estar vacío")
-    @Email(message = "Debe ser una dirección de correo electrónico válida")
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Must be a valid email address")
+    @Column(name = "email")
     private String email;
 
-    @NotBlank(message = "La contraseña no puede estar vacía")
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     @Enumerated(EnumType.STRING)

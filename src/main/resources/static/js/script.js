@@ -35,6 +35,21 @@ window.onload=function(){
 	    var publicationId = $(this).closest(".post").find(".likeButton").attr("id");
 	    window.location.href = "/publications/" + publicationId + "/post";
 	});
-    
-		
+    const textContent = document.getElementById("textContent");
+    const submitBtn = document.getElementById("submitBtn");
+
+
+    function toggleSubmitButton() {
+        if (textContent.value.trim() === "") {
+            submitBtn.disabled = true;
+        } else {
+            submitBtn.disabled = false;
+        }
+    }
+
+    toggleSubmitButton();
+
+    textContent.addEventListener("input", toggleSubmitButton);
+
+      	
 };

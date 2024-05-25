@@ -289,6 +289,10 @@ nav {
     margin: 20px 0;
     padding: 20px;
     color:#0D0C1D;
+	transition: all 0.3s;
+}
+
+.post:hover{
     box-shadow: 8px 8px 0px 0px #A69CAC;
 }
 .user-profile{
@@ -450,12 +454,16 @@ nav {
 }
 .profile-details{
     background: #F1DAC4;
-    box-shadow: 5px 5px 0px 0px #A69CAC;
     padding: 20px;
     border-radius: 4px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    transition: all 0.3s;
+}
+
+.profile-details:hover{
+	box-shadow: 5px 5px 0px 0px #A69CAC;
 }
 
 .pd-row{
@@ -646,7 +654,6 @@ nav {
     border: none;
     border-radius: 6px;
     padding: 10px 20px;
-    cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
@@ -654,6 +661,30 @@ nav {
 .post form button[type="submit"]:hover {
     background-color: #161B33;
 }
+
+#submitBtn {
+    transition: all 0.3s;
+}
+
+#submitBtn:disabled {
+    filter: brightness(0.5);
+}
+
+.gameSelect {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #0D0C1D;
+    font-size: 16px;
+    color: #F1DAC4;
+    transition: all 0.3s;
+}
+
+.gameSelect:hover {
+	outline: none;
+    box-shadow: 3px 3px 0px 0px #A69CAC;
+}
+
 /*css chat page ------------------------------------------------------*/
 #chatBox {
     width: 50%;

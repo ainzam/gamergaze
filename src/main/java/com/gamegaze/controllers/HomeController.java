@@ -78,15 +78,17 @@ public class HomeController {
     @PostMapping("/createPublication")
     public String createPost(@RequestParam("textContent") String textContent,
     		@Nullable @RequestParam("images") MultipartFile[] images,
-    		@RequestParam("gameId") Long gameId) throws IOException {
+    		@Nullable @RequestParam("gameId") Long gameId) throws IOException {
         setCurrentUser();
         Publication publication = new Publication();
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
         publication.setCreatedAt(new Date());
         
-        Game game = gameService.getGameById(gameId);
-        publication.setGame(game);
+        if (gameId != null) {
+            Game game = gameService.getGameById(gameId);
+            publication.setGame(game);
+        }
 
         List<Image> imagespost = new ArrayList<>();
 
@@ -106,8 +108,6 @@ public class HomeController {
         } else {
         	System.out.println("No images provided");
         }
-
- 
         publicationService.savePublication(publication);
         return "redirect:/home";
     }

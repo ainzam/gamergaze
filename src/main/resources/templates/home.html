@@ -3,7 +3,6 @@
 <head>
 <title>GamerGaze</title>
 <th:block th:include="~{fragments/template:: head}"></th:block>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div th:replace="~{fragments/template :: sidebar}"></div>
@@ -16,10 +15,10 @@
                         <img th:src="@{/images/{id}(id=${currentuser.profileImage.id})}"
                             alt="User Profile Image"> <span th:text="${currentuser.username}">Username</span>
                     </div>
-                    <textarea name="textContent" placeholder="Write something..."></textarea>
-                    
-                    <label for="games">Select a game:</label>
-				    <select name="gameId" id="games">
+                    <textarea id="textContent" name="textContent" placeholder="Write something..."></textarea>
+
+				    <select class="gameSelect" name="gameId" id="games">
+				    	<option value="" selected>Select a game</option>
 				        <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.title}"></option>
 				    </select>
                 
@@ -27,7 +26,7 @@
                         <i class='bx bxs-file-image'></i>
                     </label>
                     <input id="file-upload" type="file" name="images" multiple style="display: none;">
-                    <button type="submit">Create Publication</button>
+                    <button id="submitBtn" type="submit">Create Publication</button>
                 </form>
             </div>
             <div th:each="publication : ${publications}" class="post">

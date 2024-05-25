@@ -31,7 +31,17 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "registrationForm";
         }
-        registrationService.register(user);
+
+        try {
+            registrationService.register(user);
+        } catch (IllegalStateException e) {
+            if (e.getMessage().equals("Email already taken")) {
+                result.rejectValue("email", "error.user", "Email is already in use");
+            } else if (e.getMessage().equals("Username already taken")) {
+                result.rejectValue("username", "error.user", "Username is already in use");
+            }
+            return "registrationForm";
+        }
         return "redirect:/login";
     }
 

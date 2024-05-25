@@ -42,11 +42,16 @@ public class UserService implements UserDetailsService{
     }
     
     public String signUpUser(User user) {
-    	boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
+        boolean emailExists = userRepository.findByEmail(user.getEmail()).isPresent();
+        boolean usernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
     	
-    	if(userExists) {
-    		throw new IllegalStateException("email already taken");
-    	}
+        if (emailExists) {
+            throw new IllegalStateException("Email already taken");
+        }
+
+        if (usernameExists) {
+            throw new IllegalStateException("Username already taken");
+        }
     	String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
     	
     	user.setPassword(encodedPassword);
