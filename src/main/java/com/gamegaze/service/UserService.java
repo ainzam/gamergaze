@@ -87,7 +87,6 @@ public class UserService implements UserDetailsService{
                 followedUsers.add(follow.getFollowed());
             }
         }
-        
         return followedUsers;
     	
     }
@@ -95,7 +94,6 @@ public class UserService implements UserDetailsService{
     public User getUserByUsername (String username) {
     	return userRepository.findByUsername(username).orElse(null);
     }
-    
     
     
 

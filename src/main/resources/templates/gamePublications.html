@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>GamerGaze</title>
+<th:block th:include="~{fragments/template:: head}"></th:block>
+</head>
+<body>
+	<div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+	<div class="main-content">
+        <div class="postContainer">
+        	<div class="post">
+        		<img th:src="@{'/assets/' + ${game.imagePortada}}" th:alt="${game.title}">
+        		<span th:text="${game.title}"></span>
+        	</div>
+	        <div th:each="publication : ${publications}" class="post">
+                <div class="user-profile">
+                    <a th:href="@{'/profile/' + ${publication.user.username}}">
+                        <img th:src="@{/images/{id}(id=${publication.user.profileImage.id})}" alt="User Profile Image">
+                        <span th:text="@{'@' + ${publication.user.username}}"></span><br>
+                        <span th:text="${#dates.format(publication.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
+                    </a>
+                </div>
+                <p class="post-text" th:text="${publication.textContent}"></p>
+                <div th:if="${publication.images.size() > 0}">
+                    <div class="post-img" th:each="image : ${publication.images}">
+                        <img class="post-img-item" th:src="@{/images/{id}(id=${image.id})}" th:alt="${publication.images.size()}">
+                    </div>
+                </div>
+                <div class="postButtons">
+                    <div class="likeButton" th:id="${publication.id}">
+                        <i class='bx bxs-heart bx-sm'></i>
+                        <span th:text="${publication.likes}"></span>
+                    </div>
+                    <div class="commentButton">
+                        <i class='bx bxs-message-rounded-add bx-sm'></i>
+                        <span th:text="${publication.comments.size()}"></span>
+                    </div>
+                </div>
+	        </div>
+        </div>
+	</div>
+</body>
+</html>

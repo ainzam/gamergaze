@@ -46,6 +46,10 @@ public class Publication {
     @JoinColumn(name = "user_id")
     private User user;
 	
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game game;
+    
     @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
 }

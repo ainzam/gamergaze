@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gamegaze.domain.Game;
 import com.gamegaze.domain.Image;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
 import com.gamegaze.service.FollowService;
+import com.gamegaze.service.GameService;
 import com.gamegaze.service.ImageService;
 import com.gamegaze.service.PublicationService;
 import com.gamegaze.service.UserService;
@@ -40,6 +42,10 @@ public class HomeController {
 	
 	@Autowired
 	private FollowService followService;
+	
+	@Autowired
+	private GameService gameService;
+	
 	
 	
 	private User currentUser;
@@ -62,17 +68,25 @@ public class HomeController {
 		}
 		allPublications.addAll(publications);
 		allPublications.sort((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt()));
+
+		model.addAttribute("games",gameService.getAllGames());
+		
 		model.addAttribute("publications", allPublications);
 		return model;
     }
     
     @PostMapping("/createPublication")
-    public String createPost(@RequestParam("textContent") String textContent,@Nullable @RequestParam("images") MultipartFile[] images) throws IOException {
+    public String createPost(@RequestParam("textContent") String textContent,
+    		@Nullable @RequestParam("images") MultipartFile[] images,
+    		@RequestParam("gameId") Long gameId) throws IOException {
         setCurrentUser();
         Publication publication = new Publication();
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
         publication.setCreatedAt(new Date());
+        
+        Game game = gameService.getGameById(gameId);
+        publication.setGame(game);
 
         List<Image> imagespost = new ArrayList<>();
 
@@ -133,14 +147,6 @@ public class HomeController {
 		return "following";
     }
     
-    @GetMapping("/games")
-    public String games(Model model) {
-		setCurrentUser();
-		List<User> users = userService.getFollowedUsersByUser(currentUser);
-		model.addAttribute("users",users);
-		model.addAttribute("currentuser",currentUser);
-		
-		return "games";
-    }
+
 	
 }

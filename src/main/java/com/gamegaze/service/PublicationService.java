@@ -30,6 +30,10 @@ public class PublicationService {
         return publicationRepository.findByUserOrderByCreatedAt(user);
     }
     
+    public List<Publication> getPublicationsByGameId(Long gameid) {
+        return publicationRepository.findByGameIdOrderByCreatedAtDesc(gameid);
+    }
+    
     public void addCommentToPublication(Comment comment) {
         commentRepository.save(comment);
     }

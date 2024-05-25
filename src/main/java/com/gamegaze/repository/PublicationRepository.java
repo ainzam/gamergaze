@@ -10,5 +10,6 @@ import com.gamegaze.domain.User;
 public interface PublicationRepository extends JpaRepository<Publication, Long> {
 
     List<Publication> findByUserOrderByCreatedAt(User user);
+    List<Publication> findByGameIdOrderByCreatedAtDesc(Long gameId);
     
 }
