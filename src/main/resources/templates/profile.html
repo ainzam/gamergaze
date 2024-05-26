@@ -45,7 +45,7 @@
 			</div>
 			<div class="post-col">
 				<div class="postContainer postContainer-profile">
-					<div th:each="publication : ${publications}" class="post">
+					<div th:each="publication : ${publications}" class="post-profile">
 					    <div class="user-profile">
 					        <img th:src="@{/images/{id}(id=${publication.user.profileImage.id})}" alt="User Profile Image">
 					        <div>

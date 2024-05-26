@@ -2,8 +2,10 @@ package com.gamegaze.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -68,9 +70,12 @@ public class HomeController {
 		}
 		allPublications.addAll(publications);
 		allPublications.sort((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt()));
-
-		model.addAttribute("games",gameService.getAllGames());
 		
+		List<Game> games = gameService.getAllGames();
+		model.addAttribute("games",games);
+		Collections.shuffle(games);
+		List<Game> randomGames = games.stream().limit(3).collect(Collectors.toList());
+		model.addAttribute("randomGames",randomGames);
 		model.addAttribute("publications", allPublications);
 		return model;
     }
@@ -146,7 +151,5 @@ public class HomeController {
 		
 		return "following";
     }
-    
-
 	
 }

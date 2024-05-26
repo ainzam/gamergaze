@@ -12,8 +12,8 @@
 			<h2>Users followed</h2>
 		</div>
         <div class="postContainer">
-        	<div th:if="${users.size() == 0}" class="post" style="margin: auto; display: flex; justify-content: center; align-items: center;">
-        		<img alt="nofrends" src="https://i.imgflip.com/7bw89a.jpg">
+        	<div class="nofrends" th:if="${users.size() == 0}">
+        		<img alt="nofrends" th:src="@{/assets/nofriends.gif}">
 			</div>
 	        <div th:each="user : ${users}" class="post">
 	            <div class="user-profile">

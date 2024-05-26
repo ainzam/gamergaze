@@ -56,21 +56,15 @@
             </div>
         </div>
         <div class="leftContainer">
-            <div class="events">
-                <div class="events-title">
-                    <h4>Upcoming Events</h4>
-                    <a href="#">See All</a>
+            <div class="games-re">
+                <div class="games-title">
+                    <h4>Recommended games</h4>
+                    <a th:href="@{/games}">See All</a>
                 </div>
-                <div class="event">
-                    <div class="left-event">
-                        <h3>18</h3>
-                        <span>March</span>
-                    </div>
-                    <div class="right-event">
-                        <h4>R6 Private Match</h4>
-                        <p>PC</p>
-                        <a href="#">More Info</a>
-                    </div>
+                <div class="gameDiv" th:each="game : ${randomGames}">
+                    <a th:href="@{'/games/' + ${game.title} + '/publications'}">
+                        <img class="gameRecommendImg" th:src="@{'/assets/' + ${game.imagePortada}}" th:alt="${game.title}">
+                    </a>
                 </div>
             </div>
         </div>

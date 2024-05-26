@@ -366,70 +366,58 @@ nav {
 	cursor: pointer;
 }
 
-.events{
+.games-re{
     background: #F1DAC4;
     border-radius: 6px;
     margin: 20px 0;
     width: 100%;
     padding: 20px;
     color: #0D0C1D;
-    box-shadow: 5px 5px 0px 0px #A69CAC;
+    transition: all 0.3s;
 }
 
-.events-title{
+.games-re:hover{
+    box-shadow: 8px 8px 0px 0px #A69CAC;
+}
+
+
+.games-title{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 18px;
 }
 
-.events-title h4{
+.games-title h4{
     font-weight: 600;
     font-size: 16px;
 }
-.events-title a{
+.games-title a{
     text-decoration: none;
     color: #1876f2;
     font-size: 12px;
 }
 
-.event{
+.game{
     display: flex;
     font-size: 14px;
     margin-bottom: 20px;
 }
-.left-event{
-    border-radius: 10px;
-    height: 60px;
-    width: 60px;
-    margin-right: 15px;
-    padding-top: 3px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0px 0 2px 1px rgb(0 0 0);
+.gameDiv{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 6px;
+}
+.gameRecommendImg{
+	width: 100px;
+	border-radius: 6px;
+	transition: transform 0.3s ease;
 }
 
-.event p{
-    font-size: 12px;
+.gameRecommendImg:hover {
+	transform: scale(1.1);
 }
-
-.event a{
-    font-size: 12px;
-    text-decoration: none;
-    color: #1876f2;
-}
-.left-event span{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #0D0C1D;
-    color: #fff;
-    font-size: 10px;
-    padding: 4px 0;
-}
-
 /*css profile page ------------------------------------------------------*/
 
 .profile-container{
@@ -531,20 +519,32 @@ nav {
 }
 
 .post-profile{
-    width: 100%!important;
-    margin: 0!important;
+    width: 100%;
+    background: #F1DAC4;
+    border-radius: 6px;
+    margin: 0 0 20px;
+    padding: 20px;
+    color: #0D0C1D;
+    transition: all 0.3s;
 }
+
+.post-profile:hover{
+	box-shadow: 5px 5px 0px 0px #A69CAC;
+}
+
 
 .profile-intro{
     background: #F1DAC4;
-    box-shadow: 5px 5px 0px 0px #A69CAC;
     padding: 20px;
     border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s;
 }
 
-.profile-intro{
-    font-weight: 600;
+.profile-intro:hover{
+	box-shadow: 5px 5px 0px 0px #A69CAC;
 }
+
 
 .intro-text{
     margin: 10px 0;
@@ -742,6 +742,12 @@ nav {
     box-shadow: 8px 8px 0px 0px #A69CAC;
 }
 
+.nofrends{
+	height: 100%;
+	display: flex;
+    align-items: center;
+}
+
 /*Botones seguir y follow/unfollow-------------------------------------*/
 .btnFollow:hover{
 	background-color: #A69CAC;
@@ -755,3 +761,15 @@ nav {
 	background-color: #A69CAC;
 }
 
+
+/*Game publications styles-------------------------------------*/
+.gameCard{	
+	border-radius: 10px;
+	width: 200px;
+	margin: 20px 0;
+	transition: all 0.3s;
+}
+
+.gameCard:hover{
+	box-shadow: 5px 5px 0px 0px #A69CAC;
+}

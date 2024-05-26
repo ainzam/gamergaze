@@ -12,6 +12,9 @@
 			<h2>Chats from users followed</h2>
 		</div>
         <div class="postContainer">
+            <div class="nofrends" th:if="${users.size() == 0}">
+        		<img alt="nofrends" th:src="@{/assets/nofriends.gif}">
+			</div>
 	        <div th:each="user : ${users}" class="post">
 	            <div class="user-profile">
 	            	<img th:src="@{/images/{id}(id=${user.profileImage.id})}" alt="User Profile Image">

@@ -9,10 +9,9 @@
 	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
 	<div class="main-content">
         <div class="postContainer">
-        	<div class="post">
-        		<img th:src="@{'/assets/' + ${game.imagePortada}}" th:alt="${game.title}">
-        		<span th:text="${game.title}"></span>
-        	</div>
+            <div class="nofrends" th:if="${publications.size() == 0}">
+        		<img alt="nofrends" th:src="@{/assets/nopublications.gif}">
+			</div>
 	        <div th:each="publication : ${publications}" class="post">
                 <div class="user-profile">
                     <a th:href="@{'/profile/' + ${publication.user.username}}">
@@ -38,6 +37,9 @@
                     </div>
                 </div>
 	        </div>
+        </div>
+        <div class="leftContainer">
+        		<img class="gameCard" th:src="@{'/assets/' + ${game.imagePortada}}" th:alt="${game.title}">
         </div>
 	</div>
 </body>
