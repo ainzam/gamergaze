@@ -37,7 +37,6 @@ public class Publication {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    private int likes;
     
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Image> images;
@@ -49,6 +48,7 @@ public class Publication {
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
+    
     
     @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;

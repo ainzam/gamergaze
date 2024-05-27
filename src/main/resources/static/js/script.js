@@ -21,7 +21,7 @@ window.onload=function(){
 
         $.ajax({
             url: "/publications/" + publicationId + "/like",
-            type: "GET",
+            type: "POST",
             success: function(data) {
                 likeCountSpan.text(data);
             },

@@ -1,6 +1,7 @@
 package com.gamegaze.controllers;
 
 import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gamegaze.domain.Comment;
+import com.gamegaze.domain.Like;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
+import com.gamegaze.service.LikeService;
 import com.gamegaze.service.PublicationService;
 import com.gamegaze.service.UserService;
 
@@ -28,6 +31,9 @@ public class PublicationController {
  
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private LikeService likeService;
 	
 	private User currentUser;
     
@@ -45,13 +51,20 @@ public class PublicationController {
         return "redirect:/publications/" + publicationId + "/post";
     }
     
-    @GetMapping("/{publicationId}/like")
+    @PostMapping("/{publicationId}/like")
     @ResponseBody
-    public int like(@PathVariable Long publicationId){
-    	Publication publication = publicationService.getPublicationById(publicationId);
-    	publication.setLikes(publication.getLikes() + 1);
-    	publicationService.savePublication(publication);
-    	return publication.getLikes();
+    public int likePublication(@PathVariable Long publicationId, @RequestParam Long userId) {
+        Publication publication = publicationService.getPublicationById(publicationId);
+        User user = userService.getUserById(userId);
+
+        if (!likeService.existsByUserAndPublication(user, publication)) {
+            Like like = new Like();
+            like.setUser(user);
+            like.setPublication(publication);
+
+            likeService.saveLike(like);
+        }
+        return likeService.getLikesByUser(user).size();
     }
 
     @GetMapping("/{publicationId}/post")

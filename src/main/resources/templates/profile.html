@@ -39,7 +39,7 @@
 			<div class="info-col">
 				<div class="profile-intro">
 					<h3>Intro</h3>
-					<p class="intro-text">Belive in yourself and yu can do
+					<p th:text="${user != null ? user.bio : currentuser.bio}" class="intro-text">Belive in yourself and you can do
 						unbelievable things</p>
 				</div>
 			</div>

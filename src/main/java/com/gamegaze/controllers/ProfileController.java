@@ -89,6 +89,7 @@ public class ProfileController {
     public String updateProfile(@RequestParam("email") String email,
     		@RequestParam("lastName") String lastName,
     		@RequestParam("firstName") String firstName,
+    		@RequestParam("biography") String biography,
             @Nullable @RequestParam("profileImage") MultipartFile profileImage, 
             @Nullable @RequestParam("bannerImage") MultipartFile bannerImage) throws IOException {
     	
@@ -104,7 +105,9 @@ public class ProfileController {
         if (firstName!= null &&!firstName.isEmpty()) {
             existingUser.setFirstName(firstName);
         }
-
+        if (biography!= null &&!biography.isEmpty()) {
+            existingUser.setBio(biography);
+        }
         if (!profileImage.isEmpty()) {
             Image image = imageService.saveImage(profileImage);
             existingUser.setProfileImage(image);

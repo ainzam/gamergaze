@@ -1,19 +1,21 @@
 package com.gamegaze.service.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.gamegaze.domain.Follow;
 import com.gamegaze.domain.User;
 import com.gamegaze.repository.UserRepository;
 import com.gamegaze.service.FollowService;
 import com.gamegaze.service.ImageService;
 import com.gamegaze.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,6 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encodedPassword);
         user.setProfileImage(imageService.getDefaultProfileImage());
         user.setBannerImage(imageService.getDefaultProfileBanner());
+        user.setBio("Belive in yourself and yu can do unbelievable things");
         userRepository.save(user);
         return "Registration successful";
     }

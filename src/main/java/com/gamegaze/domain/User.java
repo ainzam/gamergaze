@@ -69,6 +69,9 @@ public class User implements UserDetails {
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
+    
+    @Column(name="bio")
+    private String bio;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
