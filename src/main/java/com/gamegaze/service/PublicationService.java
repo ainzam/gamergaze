@@ -13,4 +13,5 @@ public interface PublicationService {
     void addCommentToPublication(Comment comment);
     List<Comment> getCommentsByPublication(Publication publication);
     Publication getPublicationById(Long publicationId);
+    void updatePublication(Publication publication);
 }

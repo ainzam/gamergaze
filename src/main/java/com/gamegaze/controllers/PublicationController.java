@@ -33,7 +33,7 @@ public class PublicationController {
 	private UserService userService;
 	
 	@Autowired
-	private UserLikeService UserLikeService;
+	private UserLikeService userLikeService;
 	
 	private User currentUser;
     
@@ -57,14 +57,15 @@ public class PublicationController {
         Publication publication = publicationService.getPublicationById(publicationId);
         User user = userService.getUserById(userId);
 
-        if (!UserLikeService.existsByUserAndPublication(user, publication)) {
+        if (!userLikeService.existsByUserAndPublication(user, publication)) {
             UserLike like = new UserLike();
             like.setUser(user);
             like.setPublication(publication);
-            UserLikeService.saveLike(like);
+            userLikeService.saveLike(like);
         }
-        publication.setLikeCount(UserLikeService.getLikesByPublication(publication).size());
-        return UserLikeService.getLikesByPublication(publication).size();
+        publication.setLikeCount(userLikeService.getLikesByPublication(publication).size());
+        publicationService.updatePublication(publication);
+        return userLikeService.getLikesByPublication(publication).size();
     }
 
     @GetMapping("/{publicationId}/post")
