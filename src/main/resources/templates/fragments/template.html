@@ -13,6 +13,8 @@
 		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 		<link rel="stylesheet" th:href="@{/css/main.css}" href="main.css">
 		<script type="text/javascript"th:src="@{/js/script.js}"></script>
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+    	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	</head>
 	<body>
 		<div class="sidebar active" th:fragment="sidebar">
@@ -66,6 +68,13 @@
 					</a>
 					<span class="tooltip">Logout</span>
 				</li>
+				<li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+	                <a th:href="@{/home/admin}">
+	                    <i class="bx bxs-cog"></i>
+	                    <span class="nav-item">Admin</span>
+	                </a>
+	                <span class="tooltip">Admin</span>
+	            </li>
 			</ul>
 		</div>
 		<nav th:fragment="nav">

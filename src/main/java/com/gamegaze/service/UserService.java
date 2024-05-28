@@ -11,5 +11,7 @@ public interface UserService extends UserDetailsService {
     void updateUser(User user) throws IOException;
     User getUserById(Long id);
     List<User> getFollowedUsersByUser(User currentUser);
+    List<User> getAllUsers();
+    void deleteUser(User user);
     User getUserByUsername(String username);
 }

@@ -10,6 +10,8 @@ public interface PublicationService {
     void savePublication(Publication publication);
     List<Publication> getPublicationsByUser(User user);
     List<Publication> getPublicationsByGameId(Long gameId);
+    List<Publication> getAllPublications();
+    void deletePublication(Publication publication);
     void addCommentToPublication(Comment comment);
     List<Comment> getCommentsByPublication(Publication publication);
     Publication getPublicationById(Long publicationId);

@@ -80,6 +80,37 @@ public class HomeController {
 		return model;
     }
     
+    @GetMapping("/home/admin")
+    public ModelAndView adminHome(Model model) {
+    	ModelAndView modelAndView = new ModelAndView("adminConsole");
+    	setCurrentUser();
+    	modelAndView.addObject("currentuser",currentUser);
+    	
+    	List<Publication> publications = publicationService.getAllPublications();
+    	modelAndView.addObject("publications", publications);
+    	
+    	List<User> users = userService.getAllUsers();
+    	modelAndView.addObject("users", users);
+    	
+    	return modelAndView;
+    }
+    
+    @PostMapping("/deleteUser")
+    public String deleteUser(@RequestParam("userId") Long userId) {
+    	User user = userService.getUserById(userId);
+        userService.deleteUser(user);
+        return "redirect:/home/admin";
+    }
+
+    @PostMapping("/deletePublication")
+    public String deletePublication(@RequestParam("publicationId") Long publicationId) {
+    	Publication P = publicationService.getPublicationById(publicationId);
+        publicationService.deletePublication(P);
+        return "redirect:/home/admin";
+    }
+    
+    
+    
     @PostMapping("/createPublication")
     public String createPost(@RequestParam("textContent") String textContent,
     		@Nullable @RequestParam("images") MultipartFile[] images,

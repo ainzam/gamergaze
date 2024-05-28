@@ -6,10 +6,8 @@ import com.gamegaze.repository.CommentRepository;
 import com.gamegaze.repository.PublicationRepository;
 import com.gamegaze.service.PublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -61,4 +59,15 @@ public class PublicationServiceImpl implements PublicationService {
     public Publication getPublicationById(Long publicationId) {
         return publicationRepository.findById(publicationId).orElse(null);
     }
+
+	@Override
+	public List<Publication> getAllPublications() {
+		return publicationRepository.findAll();
+	}
+
+	@Override
+	public void deletePublication(Publication publication) {
+		publicationRepository.delete(publication);
+		
+	}
 }

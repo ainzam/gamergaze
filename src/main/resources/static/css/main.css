@@ -777,3 +777,11 @@ nav {
 .gameCard:hover{
 	box-shadow: 5px 5px 0px 0px #A69CAC;
 }
+
+
+
+.adminConsole{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}

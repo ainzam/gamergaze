@@ -86,11 +86,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Publication> publications;
     
-    @OneToMany(mappedBy = "follower")
+    @OneToMany(mappedBy = "follower",cascade = CascadeType.ALL)
     private List<Follow> follows;
 
-    @OneToMany(mappedBy = "followed")
+    @OneToMany(mappedBy = "followed",cascade = CascadeType.ALL)
     private List<Follow> followers;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserLike> likes;
 
 	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
 		super();
