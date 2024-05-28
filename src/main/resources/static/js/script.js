@@ -44,7 +44,7 @@ window.onload=function(){
     });
     
     $(".commentButton").click(function() {
-	    var publicationId = $(this).closest(".post").find(".likeButton").attr("id");
+	    var publicationId = $(this).closest(".post").find(".likeButton").data("publication-id");
 	    window.location.href = "/publications/" + publicationId + "/post";
 	});
     const textContent = document.getElementById("textContent");

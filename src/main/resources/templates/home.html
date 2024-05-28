@@ -53,6 +53,7 @@
                     <input type="hidden" id="currentUserId" th:value="${currentuser.id}" />
                     <div class="commentButton">
                         <i class='bx bxs-message-rounded-add bx-sm'></i>
+                        <span class="likeCount" th:text="${publication.comments.size()}"></span>
                     </div>
                 </div>
             </div>

@@ -57,14 +57,15 @@
 					    <div class="post-img" th:each="image : ${publication.images}">
 					        <img class="post-img-item"th:src="@{/images/{id}(id=${image.id})}" alt="Publication Image">
 					    </div>
-						<div class="postButtons">
-		                    <div class="likeButton" th:id="${publication.id}">
+		                <div class="postButtons">
+		                    <div class="likeButton" th:data-publication-id="${publication.id}">
 		                        <i class='bx bxs-heart bx-sm'></i>
-		                        <span class="likeCount"></span>
-		                        <input type="hidden" id="currentUserId" th:value="${currentuser.id}" />
+		                        <span class="likeCount" th:text="${publication.likeCount}"></span>
 		                    </div>
+		                    <input type="hidden" id="currentUserId" th:value="${currentuser.id}" />
 		                    <div class="commentButton">
 		                        <i class='bx bxs-message-rounded-add bx-sm'></i>
+		                        <span class="likeCount" th:text="${publication.comments.size()}"></span>
 		                    </div>
 		                </div>
 					</div>
