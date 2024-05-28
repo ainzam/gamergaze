@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.gamegaze.domain.Like;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
+import com.gamegaze.domain.UserLike;
 
-public interface LikeRepository extends JpaRepository<Like, Long> {
+public interface UserLikeRepository extends JpaRepository<UserLike, Long> {
 	
-	List<Like> findByUser(User user);
-	List<Like> findByPublication(Publication publication);
+	List<UserLike> findByUser(User user);
+	List<UserLike> findByPublication(Publication publication);
 	boolean existsByUserAndPublication(User user, Publication publication);
     
 }

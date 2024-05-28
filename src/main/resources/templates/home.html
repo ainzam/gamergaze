@@ -3,6 +3,8 @@
 <head>
 <title>GamerGaze</title>
 <th:block th:include="~{fragments/template:: head}"></th:block>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
     <div th:replace="~{fragments/template :: sidebar}"></div>
@@ -44,13 +46,13 @@
                     </div>
                 </div>
                 <div class="postButtons">
-                    <div class="likeButton" th:id="${publication.id}">
+                    <div class="likeButton" th:data-publication-id="${publication.id}">
                         <i class='bx bxs-heart bx-sm'></i>
-                        <span th:text="${publication.likes}"></span>
+                        <span class="likeCount" th:text="${publication.likeCount}"></span>
                     </div>
+                    <input type="hidden" id="currentUserId" th:value="${currentuser.id}" />
                     <div class="commentButton">
                         <i class='bx bxs-message-rounded-add bx-sm'></i>
-                        <span th:text="${publication.comments.size()}"></span>
                     </div>
                 </div>
             </div>

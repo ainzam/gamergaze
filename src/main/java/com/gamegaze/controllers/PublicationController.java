@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gamegaze.domain.Comment;
-import com.gamegaze.domain.Like;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
-import com.gamegaze.service.LikeService;
+import com.gamegaze.domain.UserLike;
+import com.gamegaze.service.UserLikeService;
 import com.gamegaze.service.PublicationService;
 import com.gamegaze.service.UserService;
 
@@ -33,7 +33,7 @@ public class PublicationController {
 	private UserService userService;
 	
 	@Autowired
-	private LikeService likeService;
+	private UserLikeService UserLikeService;
 	
 	private User currentUser;
     
@@ -57,14 +57,14 @@ public class PublicationController {
         Publication publication = publicationService.getPublicationById(publicationId);
         User user = userService.getUserById(userId);
 
-        if (!likeService.existsByUserAndPublication(user, publication)) {
-            Like like = new Like();
+        if (!UserLikeService.existsByUserAndPublication(user, publication)) {
+            UserLike like = new UserLike();
             like.setUser(user);
             like.setPublication(publication);
-
-            likeService.saveLike(like);
+            UserLikeService.saveLike(like);
         }
-        return likeService.getLikesByUser(user).size();
+        publication.setLikeCount(UserLikeService.getLikesByPublication(publication).size());
+        return UserLikeService.getLikesByPublication(publication).size();
     }
 
     @GetMapping("/{publicationId}/post")

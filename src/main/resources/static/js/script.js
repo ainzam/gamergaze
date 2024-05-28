@@ -15,18 +15,30 @@ window.onload=function(){
         searchForm.submit();
     });
     
+    var csrfToken = $("meta[name='_csrf']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+    
     $(".likeButton").click(function() {
-        var publicationId = $(this).attr("id");
-        var likeCountSpan = $(this).find("span");
+        var publicationId = $(this).data("publication-id");
+        var likeButton = $(this);
+        var likeCountSpan = likeButton.find(".likeCount");
+        var userId = $("#currentUserId").val();
 
         $.ajax({
-            url: "/publications/" + publicationId + "/like",
-            type: "POST",
-            success: function(data) {
-                likeCountSpan.text(data);
+            url: '/publications/' + publicationId + '/like',
+            type: 'POST',
+            data: {
+                userId: userId
             },
-            error: function(error) {
-                console.log("Error:", error);
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            },
+            success: function(response) {
+                likeCountSpan.text(response);
+                likeButton.find("i").addClass("liked");
+            },
+            error: function(xhr, status, error) {
+                console.error("Error liking the publication:", error);
             }
         });
     });

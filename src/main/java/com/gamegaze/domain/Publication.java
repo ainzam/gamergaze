@@ -49,6 +49,7 @@ public class Publication {
     @JoinColumn(name = "game_id")
     private Game game;
     
+    private int likeCount;
     
     @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;

@@ -89,6 +89,7 @@ public class HomeController {
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
         publication.setCreatedAt(new Date());
+        publication.setLikeCount(0);
         
         if (gameId != null) {
             Game game = gameService.getGameById(gameId);

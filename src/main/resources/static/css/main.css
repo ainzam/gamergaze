@@ -762,6 +762,9 @@ nav {
 	background-color: #A69CAC;
 }
 
+.liked {
+    color: red;
+}
 
 /*Game publications styles-------------------------------------*/
 .gameCard{	

@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Like {
+public class UserLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,4 @@ public class Like {
 
     @ManyToOne
     private Publication publication;
-
 }
