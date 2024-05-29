@@ -5,6 +5,9 @@ import com.gamegaze.domain.User;
 import com.gamegaze.repository.CommentRepository;
 import com.gamegaze.repository.PublicationRepository;
 import com.gamegaze.service.PublicationService;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,8 +69,10 @@ public class PublicationServiceImpl implements PublicationService {
 	}
 
 	@Override
+	@Transactional
 	public void deletePublication(Publication publication) {
-		publicationRepository.delete(publication);
+	        publicationRepository.delete(publication);
+	        publicationRepository.flush();
 		
 	}
 }

@@ -1,67 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>GamerGaze</title>
-<th:block th:include="~{fragments/template:: head}"></th:block>
+    <title>GamerGaze</title>
+    <th:block th:include="~{fragments/template::head}"></th:block>
 </head>
 <body>
     <div th:replace="~{fragments/template :: sidebar}"></div>
-    <nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+    <nav th:replace="~{fragments/template :: nav}">Navbar</nav>
     <div class="main-content">
-    	<div class="adminConsole">
-	    	<div class="post">
-	        	<h2>Admin Console</h2>
-	        </div>
-	        <!-- Users Table -->
-	    	<div class="post">
-	        	<h3>Users</h3>
-	        </div>
-	        <table class="table post">
-	            <thead>
-	                <tr>
-	                    <th>ID</th>
-	                    <th>Username</th>
-	                    <th>Email</th>
-	                    <th>Actions</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	                <tr th:each="user : ${users}">
-	                    <td th:text="${user.id}">1</td>
-	                    <td th:text="${user.username}">Username</td>
-	                    <td th:text="${user.email}">user@example.com</td>
-	                    <td>
-	                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Delete</button>
-	                    </td>
-	                </tr>
-	            </tbody>
-	        </table>
-	
-	        <!-- Publications Table -->
-	       	<div class="post">
-	        	<h3>Publications</h3>
-	        </div>
-	        <table class="table post">
-	            <thead>
-	                <tr>
-	                    <th>ID</th>
-	                    <th>Content</th>
-	                    <th>Author</th>
-	                    <th>Actions</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	                <tr th:each="publication : ${publications}">
-	                    <td th:text="${publication.id}">1</td>
-	                    <td th:text="${publication.textContent}">Content</td>
-	                    <td th:text="${publication.user.username}">Author</td>
-	                    <td>
-	                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" th:data-id="${publication.id}" th:data-content="${publication.textContent}">Delete</button>
-	                    </td>
-	                </tr>
-	            </tbody>
-	        </table>
-		</div>
+        <div class="adminConsole">
+            <div class="post adminPost">
+                <h2>Admin Console</h2>
+            </div>
+            <div class="post adminPost">
+                <h3>Users</h3>
+            
+	            <table class="table table-dark">
+	                <thead>
+	                    <tr>
+	                        <th>ID</th>
+	                        <th>Username</th>
+	                        <th>Email</th>
+	                        <th>Status</th>
+	                        <th>Actions</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr th:each="user : ${users}">
+	                        <td th:text="${user.id}">1</td>
+	                        <td th:text="${user.username}">Username</td>
+	                        <td th:text="${user.email}">user@example.com</td>
+	                        <td th:text="${user.suspended ? 'Suspended until ' + #dates.format(user.suspendedUntil, 'yyyy-MM-dd HH:mm:ss') : 'Active'}"></td>
+	                        <td>
+	                            <div th:if="${user.suspended}">
+	                                <button class="btn btn-success" th:onclick="'restoreUser(' + ${user.id} + ')'">Restore</button>
+	                            </div>
+	                            <div th:if="${!user.suspended}">
+	                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#suspendUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Suspend</button>
+	                            </div>
+	                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Delete</button>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+			</div>
+            <div class="post adminPost">
+                <h3>Publications</h3>
+	            <table class="table table-dark">
+	                <thead>
+	                    <tr>
+	                        <th>ID</th>
+	                        <th>Content</th>
+	                        <th>Author</th>
+	                        <th>Actions</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr th:each="publication : ${publications}">
+	                        <td th:text="${publication.id}">1</td>
+	                        <td th:text="${publication.textContent}">Content</td>
+	                        <td th:text="${publication.user.username}">Author</td>
+	                        <td>
+	                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" th:data-id="${publication.id}" th:data-content="${publication.textContent}">Delete</button>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+			</div>
+        </div>
+        <div class="leftContainer">
+            <div class="games-re">
+                <div class="games-title">
+                    <h4>Recommended games from users:</h4>
+                    
+                </div>
+            </div>
+        </div>
+		
+        <!-- Suspend User Modal -->
+        <div class="modal fade" id="suspendUserModal" tabindex="-1" aria-labelledby="suspendUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="suspendUserModalLabel">Suspend User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="suspendUserForm">
+                            <div class="mb-3">
+                                <label for="suspendUntil" class="form-label">Suspend Until</label>
+                                <input type="datetime-local" class="form-control" id="suspendUntil" name="suspendUntil">
+                            </div>
+                            <input type="hidden" name="userId" id="suspendUserId">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-warning" onclick="submitSuspendForm()">Suspend</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Delete User Modal -->
         <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -74,7 +114,7 @@
                         Are you sure you want to delete user <span id="deleteUserName"></span>?
                     </div>
                     <div class="modal-footer">
-                        <form th:action="@{/deleteUser}" method="post">
+                        <form th:action="@{/home/admin/deleteUser}" method="post">
                             <input type="hidden" name="userId" id="deleteUserId">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -96,7 +136,7 @@
                         Are you sure you want to delete publication: <span id="deletePublicationContent"></span>?
                     </div>
                     <div class="modal-footer">
-                        <form th:action="@{/deletePublication}" method="post">
+                        <form th:action="@{/home/admin/deletePublication}" method="post">
                             <input type="hidden" name="publicationId" id="deletePublicationId">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -106,36 +146,89 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Pass user data to modal
-        var deleteUserModal = document.getElementById('deleteUserModal');
-        deleteUserModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var userId = button.getAttribute('data-id');
-            var userName = button.getAttribute('data-name');
-            
-            var modalUserId = deleteUserModal.querySelector('#deleteUserId');
-            var modalUserName = deleteUserModal.querySelector('#deleteUserName');
-            
-            modalUserId.value = userId;
-            modalUserName.textContent = userName;
-        });
+	 // Pass user data to suspend modal
+    var suspendUserModal = document.getElementById('suspendUserModal');
+    suspendUserModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var userId = button.getAttribute('data-id');
+        var modalUserId = suspendUserModal.querySelector('#suspendUserId');
+        modalUserId.value = userId;
+    });
+    
+    var csrfToken = $("meta[name='_csrf']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+    
+    function submitSuspendForm() {
+        var form = $('#suspendUserForm');
+        var userId = $('#suspendUserId').val();
+        var suspendUntil = $('#suspendUntil').val();
 
-        // Pass publication data to modal
-        var deletePublicationModal = document.getElementById('deletePublicationModal');
-        deletePublicationModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var publicationId = button.getAttribute('data-id');
-            var publicationContent = button.getAttribute('data-content');
-            
-            var modalPublicationId = deletePublicationModal.querySelector('#deletePublicationId');
-            var modalPublicationContent = deletePublicationModal.querySelector('#deletePublicationContent');
-            
-            modalPublicationId.value = publicationId;
-            modalPublicationContent.textContent = publicationContent;
+        $.ajax({
+            url: '/home/admin/suspendUser',
+            type: 'POST',
+            contentType: 'application/json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            },
+            data: JSON.stringify({
+                userId: userId,
+                suspendUntil: suspendUntil
+            }),
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                alert('Error suspending user.');
+            }
         });
+    }
+
+    function restoreUser(userId) {
+        $.ajax({
+            url: '/home/admin/restoreUser',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ userId: userId }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                alert('Error restoring user.');
+            }
+        });
+    }
+
+    // Pass user data to delete modal
+    var deleteUserModal = document.getElementById('deleteUserModal');
+    deleteUserModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var userId = button.getAttribute('data-id');
+        var userName = button.getAttribute('data-name');
+        
+        var modalUserId = deleteUserModal.querySelector('#deleteUserId');
+        var modalUserName = deleteUserModal.querySelector('#deleteUserName');
+        
+        modalUserId.value = userId;
+        modalUserName.textContent = userName;
+    });
+
+    // Pass publication data to delete modal
+    var deletePublicationModal = document.getElementById('deletePublicationModal');
+    deletePublicationModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var publicationId = button.getAttribute('data-id');
+        var publicationContent = button.getAttribute('data-content');
+        
+        var modalPublicationId = deletePublicationModal.querySelector('#deletePublicationId');
+        var modalPublicationContent = deletePublicationModal.querySelector('#deletePublicationContent');
+        
+        modalPublicationId.value = publicationId;
+        modalPublicationContent.textContent = publicationContent;
+    });
     </script>
 </body>
 </html>

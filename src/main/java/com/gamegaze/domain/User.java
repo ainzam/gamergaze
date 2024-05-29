@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +25,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
@@ -70,6 +73,13 @@ public class User implements UserDetails {
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
     
+    @Column(name = "suspended", nullable = false)
+    private boolean suspended = false;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "suspended_until")
+    private Date suspendedUntil;
+    
     @Column(name="bio")
     private String bio;
 
@@ -83,7 +93,7 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Image profileImage;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Publication> publications;
     
     @OneToMany(mappedBy = "follower",cascade = CascadeType.ALL)
@@ -139,7 +149,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !suspended || (suspendedUntil != null && new Date().after(suspendedUntil));
     }
     
 

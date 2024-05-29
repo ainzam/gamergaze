@@ -60,7 +60,7 @@
 		                <div class="postButtons">
 		                    <div class="likeButton" th:data-publication-id="${publication.id}">
 		                        <i class='bx bxs-heart bx-sm'></i>
-		                        <span class="likeCount" th:text="${publication.likeCount}"></span>
+		                        <span class="likeCount" th:text="${publication.likes.size()}"></span>
 		                    </div>
 		                    <input type="hidden" id="currentUserId" th:value="${currentuser.id}" />
 		                    <div class="commentButton">
