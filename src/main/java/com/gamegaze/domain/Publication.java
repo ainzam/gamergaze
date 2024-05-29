@@ -53,4 +53,7 @@ public class Publication {
     
     @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
+    
+    @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserLike> likes;
 }

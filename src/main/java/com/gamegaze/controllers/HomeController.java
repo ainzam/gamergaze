@@ -104,8 +104,8 @@ public class HomeController {
 
     @PostMapping("/deletePublication")
     public String deletePublication(@RequestParam("publicationId") Long publicationId) {
-    	Publication P = publicationService.getPublicationById(publicationId);
-        publicationService.deletePublication(P);
+    	Publication publication = publicationService.getPublicationById(publicationId);
+        publicationService.deletePublication(publication);
         return "redirect:/home/admin";
     }
     
