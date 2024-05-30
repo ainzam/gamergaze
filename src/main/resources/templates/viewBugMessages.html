@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bug Messages</title>
+    <th:block th:include="~{fragments/template::head}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/template :: sidebar}"></div>
+    <nav th:replace="~{fragments/template :: nav}">Navbar</nav>
+    <div class="main-content">
+        <div class="post">
+            <h2>Bug Messages</h2>
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Message</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="message : ${messages}">
+                        <td th:text="${message.id}">1</td>
+                        <td th:text="${message.user.username}">User</td>
+                        <td th:text="${message.message}">Message content</td>
+                        <td>
+				            <form th:action="@{/home/admin/contactMessages/delete/{id}(id=${message.id})}" method="post">
+				                <button type="submit">Descartar</button>
+				            </form>
+				        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

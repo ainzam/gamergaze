@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gamegaze.domain.ContactMessage;
+import com.gamegaze.domain.ContactReason;
 import com.gamegaze.domain.User;
 import com.gamegaze.service.ContactMessageService;
 import com.gamegaze.service.UserService;
@@ -27,31 +28,23 @@ public class ContactController {
 	
 	private User currentUser;
 	
-	@GetMapping
-	public String getContactForm(Model model) {
-		setCurrentUser();
-		model.addAttribute("currentuser", currentUser);
-		return "form";
-	}
-	
-	@PostMapping
-	public String submitContactForm(
-		@RequestParam("username") String username,
-		@RequestParam("email") String email,
-		@RequestParam("dropdown") String reason,
-		@RequestParam("area") String message) {
-		
-		setCurrentUser();
-		ContactMessage contactMessage = new ContactMessage();
-		contactMessage.setUsername(username);
-		contactMessage.setEmail(email);
-		contactMessage.setReason(reason);
-		contactMessage.setMessage(message);
-		contactMessage.setUser(currentUser);
-		
-		contactMessageService.saveContactMessage(contactMessage);
-		return "redirect:/form?success";
-	}
+    @GetMapping
+    public String getContactForm(Model model,@RequestParam(name = "success", required = false) String success) {
+        setCurrentUser();
+        model.addAttribute("currentuser", currentUser);
+        model.addAttribute("contactMessage", new ContactMessage());
+        model.addAttribute("reasons", ContactReason.values());
+        model.addAttribute("success", success);
+        return "form";
+    }
+
+    @PostMapping
+    public String submitContactForm(ContactMessage contactMessage) {
+        setCurrentUser();
+        contactMessage.setUser(currentUser);
+        contactMessageService.saveContactMessage(contactMessage);
+        return "redirect:/form?success";
+    }
 	
 	private void setCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

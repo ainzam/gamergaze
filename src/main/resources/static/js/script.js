@@ -47,10 +47,11 @@ window.onload=function(){
 	    var publicationId = $(this).closest(".post").find(".likeButton").data("publication-id");
 	    window.location.href = "/publications/" + publicationId + "/post";
 	});
-    const textContent = document.getElementById("textContent");
-    const submitBtn = document.getElementById("submitBtn");
+    var textContent = document.getElementById("textContent");
+    var submitBtn = document.getElementById("submitBtn");
 
-
+	submitBtn.disabled = true;
+	
     function toggleSubmitButton() {
         if (textContent.value.trim() === "") {
             submitBtn.disabled = true;
@@ -59,9 +60,8 @@ window.onload=function(){
         }
     }
 
-    toggleSubmitButton();
 
     textContent.addEventListener("input", toggleSubmitButton);
-
+    
       	
 };

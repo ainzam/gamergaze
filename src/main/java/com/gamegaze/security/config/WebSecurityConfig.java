@@ -30,7 +30,7 @@ public class WebSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				authorize -> authorize.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-				.requestMatchers(ENDPOINTS_WHITELIST).permitAll().requestMatchers("/home/admin").hasRole("ADMIN")
+				.requestMatchers(ENDPOINTS_WHITELIST).permitAll().requestMatchers("/home/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated())
 				.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true))
 		        .exceptionHandling(exception -> exception

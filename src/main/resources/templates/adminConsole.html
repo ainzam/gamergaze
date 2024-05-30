@@ -15,68 +15,78 @@
             <div class="post adminPost">
                 <h3>Users</h3>
             
-	            <table class="table table-dark">
-	                <thead>
-	                    <tr>
-	                        <th>ID</th>
-	                        <th>Username</th>
-	                        <th>Email</th>
-	                        <th>Status</th>
-	                        <th>Actions</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <tr th:each="user : ${users}">
-	                        <td th:text="${user.id}">1</td>
-	                        <td th:text="${user.username}">Username</td>
-	                        <td th:text="${user.email}">user@example.com</td>
-	                        <td th:text="${user.suspended ? 'Suspended until ' + #dates.format(user.suspendedUntil, 'yyyy-MM-dd HH:mm:ss') : 'Active'}"></td>
-	                        <td>
-	                            <div th:if="${user.suspended}">
-	                                <button class="btn btn-success" th:onclick="'restoreUser(' + ${user.id} + ')'">Restore</button>
-	                            </div>
-	                            <div th:if="${!user.suspended}">
-	                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#suspendUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Suspend</button>
-	                            </div>
-	                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Delete</button>
-	                        </td>
-	                    </tr>
-	                </tbody>
-	            </table>
-			</div>
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}">1</td>
+                            <td th:text="${user.username}">Username</td>
+                            <td th:text="${user.email}">user@example.com</td>
+                            <td th:text="${user.suspended ? 'Suspended until ' + #dates.format(user.suspendedUntil, 'yyyy-MM-dd HH:mm:ss') : 'Active'}"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <div th:if="${user.suspended}">
+                                        <button class="btn btn-success" th:onclick="'restoreUser(' + ${user.id} + ')'">Restore</button>
+                                    </div>
+                                    <div th:if="${!user.suspended}">
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#suspendUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Suspend</button>
+                                    </div>
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" th:data-id="${user.id}" th:data-name="${user.username}">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="post adminPost">
                 <h3>Publications</h3>
-	            <table class="table table-dark">
-	                <thead>
-	                    <tr>
-	                        <th>ID</th>
-	                        <th>Content</th>
-	                        <th>Author</th>
-	                        <th>Actions</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <tr th:each="publication : ${publications}">
-	                        <td th:text="${publication.id}">1</td>
-	                        <td th:text="${publication.textContent}">Content</td>
-	                        <td th:text="${publication.user.username}">Author</td>
-	                        <td>
-	                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" th:data-id="${publication.id}" th:data-content="${publication.textContent}">Delete</button>
-	                        </td>
-	                    </tr>
-	                </tbody>
-	            </table>
-			</div>
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Content</th>
+                            <th>Author</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="publication : ${publications}">
+                            <td th:text="${publication.id}">1</td>
+                            <td th:text="${publication.textContent}">Content</td>
+                            <td th:text="${publication.user.username}">Author</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" th:data-id="${publication.id}" th:data-content="${publication.textContent}">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="leftContainer">
             <div class="games-re">
                 <div class="games-title">
-                    <h4>Recommended games from users:</h4>
-                    
+                    <h4>Recommended games from users: <span th:text="${bugCount}"></span></h4>
+                    <a th:href="@{/home/admin/contactMessages/BUG}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            <div class="games-re">
+                <div class="games-title">
+                    <h4>Bugs reported by users: <span th:text="${recommendationCount}"></span></h4>
+                    <a th:href="@{/home/admin/contactMessages/GAME_RECOMMENDATION}" class="btn btn-primary">View</a>
                 </div>
             </div>
         </div>
-		
+        
         <!-- Suspend User Modal -->
         <div class="modal fade" id="suspendUserModal" tabindex="-1" aria-labelledby="suspendUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -147,7 +157,7 @@
         </div>
     </div>
     <script>
-	 // Pass user data to suspend modal
+    // Pass user data to suspend modal
     var suspendUserModal = document.getElementById('suspendUserModal');
     suspendUserModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;

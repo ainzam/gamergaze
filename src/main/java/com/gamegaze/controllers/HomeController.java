@@ -8,8 +8,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,16 +15,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gamegaze.domain.ContactMessage;
+import com.gamegaze.domain.ContactReason;
 import com.gamegaze.domain.Game;
 import com.gamegaze.domain.Image;
 import com.gamegaze.domain.Publication;
 import com.gamegaze.domain.User;
+import com.gamegaze.service.ContactMessageService;
 import com.gamegaze.service.FollowService;
 import com.gamegaze.service.GameService;
 import com.gamegaze.service.ImageService;
@@ -53,6 +55,8 @@ public class HomeController {
 	@Autowired
 	private GameService gameService;
 	
+	@Autowired
+	private ContactMessageService contactMessageService;
 	
 	
 	private User currentUser;
@@ -79,7 +83,7 @@ public class HomeController {
 		List<Game> games = gameService.getAllGames();
 		model.addAttribute("games",games);
 		Collections.shuffle(games);
-		List<Game> randomGames = games.stream().limit(3).collect(Collectors.toList());
+		List<Game> randomGames = games.stream().limit(3).toList();
 		model.addAttribute("randomGames",randomGames);
 		model.addAttribute("publications", allPublications);
 		return model;
@@ -97,6 +101,15 @@ public class HomeController {
     	List<User> users = userService.getAllUsers();
     	modelAndView.addObject("users", users);
     	
+    	List<ContactMessage> messages = contactMessageService.getAllContactMessages();
+    	modelAndView.addObject("messages", messages);
+    	
+        long bugCount = messages.stream().filter(m -> m.getReason() == ContactReason.BUG).count();
+        long recommendationCount = messages.stream().filter(m -> m.getReason() == ContactReason.GAME_RECOMMENDATION).count();
+        
+        modelAndView.addObject("bugCount", bugCount);
+        modelAndView.addObject("recommendationCount", recommendationCount);
+    	
     	return modelAndView;
     }
     
@@ -112,6 +125,36 @@ public class HomeController {
     	Publication publication = publicationService.getPublicationById(publicationId);
         publicationService.deletePublication(publication);
         return "redirect:/home/admin";
+    }
+    
+    @GetMapping("/home/admin/contactMessages/BUG")
+    public String viewBugMessages(Model model) {
+        List<ContactMessage> allMessages = contactMessageService.getAllContactMessages();
+        List<ContactMessage> bugMessages = new ArrayList<>();
+        for (ContactMessage message : allMessages) {
+            if (message.getReason() == ContactReason.BUG) {
+                bugMessages.add(message);
+            }
+        }
+    	setCurrentUser();
+    	model.addAttribute("currentuser",currentUser);
+        model.addAttribute("messages", bugMessages);
+        return "viewBugMessages"; 
+    }
+
+    @GetMapping("/home/admin/contactMessages/GAME_RECOMMENDATION")
+    public String viewRecommendationMessages(Model model) {
+        List<ContactMessage> allMessages = contactMessageService.getAllContactMessages();
+        List<ContactMessage> recommendationMessages = new ArrayList<>();
+        for (ContactMessage message : allMessages) {
+            if (message.getReason() == ContactReason.GAME_RECOMMENDATION) {
+                recommendationMessages.add(message);
+            }
+        }
+    	setCurrentUser();
+    	model.addAttribute("currentuser",currentUser);
+        model.addAttribute("messages", recommendationMessages);
+        return "viewRecommendationMessages";
     }
     
     @PostMapping("/home/admin/suspendUser")
@@ -139,7 +182,17 @@ public class HomeController {
         return ResponseEntity.ok().build();
     }
     
-    
+    @PostMapping("/home/admin/contactMessages/delete/{id}")
+    public String deleteMessage(@PathVariable("id") Long id) {
+    	ContactMessage message = contactMessageService.getContactMessagesById(id);
+        contactMessageService.deleteContactMessage(message);
+        if(message.getReason() == ContactReason.GAME_RECOMMENDATION) {
+        	return "redirect:/home/admin/contactMessages/GAME_RECOMMENDATION";
+        }else {
+        	return "redirect:/home/admin/contactMessages/BUG";
+        }
+        
+    }
     
     @PostMapping("/createPublication")
     public String createPost(@RequestParam("textContent") String textContent,

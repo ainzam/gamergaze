@@ -778,7 +778,7 @@ nav {
 	box-shadow: 5px 5px 0px 0px #A69CAC;
 }
 
-
+/*Admin console styles-------------------------------------*/
 
 .adminConsole{
 	display: flex;
@@ -788,4 +788,110 @@ nav {
 
 .adminPost{
 	width: 90%;
+}
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F1DAC4;
+    color: #0D0C1D;
+}
+
+.table-custom th, .table-custom td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-custom th {
+    background-color: #E0C3A3;
+}
+
+/* Estilos para los botones */
+.table-custom .btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.table-custom .btn {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.table-custom .btn-success {
+    background-color: #28a745;
+}
+
+.table-custom .btn-warning {
+    background-color: #ffc107;
+}
+
+.table-custom .btn-danger {
+    background-color: #dc3545;
+}
+
+/* Hover effects */
+.table-custom .btn:hover {
+    opacity: 0.8;
+}
+
+
+/*Contact us view styles-------------------------------------*/
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #0D0C1D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.contact-form button:hover {
+    background-color: #333;
+}
+
+.contact-form button:disabled {
+    filter: brightness(0.5);
+}
+
+.success-message {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
