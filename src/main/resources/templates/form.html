@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Us!</title>
+        <link rel="stylesheet" th:href="@{/css/form.css}" href="form.css">
+        <th:block th:include="~{fragments/template:: head}"></th:block>
+    </head>
+    <body>
+    <div th:replace="~{fragments/template :: sidebar}"></div>
+	<nav th:replace="~{fragments/template  :: nav}">Navbar</nav>
+	<div class="main-content">
+	<div class="container">
+        <h1 id="title">Contact Us!</h1>
+        <p id="description">Please let us know any games you want us to add, bugs, or recomendations!</p>
+        <form id="survey-form">
+            <fieldset class="width">
+                <label id="name-label">Username <input class="width" id="name" type="name" placeholder="Enter your Username" required></label>
+                <label id="email-label">Email <input class="width" id="email" type="email" placeholder="example@hotmail.com" required></label>
+            </fieldset>
+            <hr class="width">
+            <fieldset class="width">
+                <label>
+                  <legend>Why do you want to contact us?</legend>
+                  <select id="dropdown" class="width" required>
+                    <option value="">(Choose an option)</option>
+                    <option value="1">Suggestion</option>
+                    <option value="2">Bug</option>
+                    <option value="3">Add a Game</option>
+                  </select>
+                </label>
+            </fieldset>
+            <hr class="width">
+            <fieldset class="width">
+                <legend>Let us know!</legend>
+                <label>
+                    <textarea class="width" id="area" placeholder="Write here..." row="3" cols="30"></textarea>
+                </label>
+            </fieldset>
+            <button id="submit" type="submit" class="width" />Submit</button>
+        </form>
+        </div>
+	</div>
+    </body>
+</html>
