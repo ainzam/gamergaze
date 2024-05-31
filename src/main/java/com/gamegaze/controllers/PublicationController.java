@@ -62,8 +62,10 @@ public class PublicationController {
             like.setUser(user);
             like.setPublication(publication);
             userLikeService.saveLike(like);
+        }else {
+        	UserLike like = userLikeService.getLikeByUserAndPublication(user, publication);
+        	userLikeService.deleteLike(like);
         }
-        publication.setLikeCount(userLikeService.getLikesByPublication(publication).size());
         publicationService.updatePublication(publication);
         return userLikeService.getLikesByPublication(publication).size();
     }

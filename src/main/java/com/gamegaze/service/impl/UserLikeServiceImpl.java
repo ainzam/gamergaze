@@ -36,5 +36,15 @@ public class UserLikeServiceImpl implements UserLikeService{
 	public void saveLike(UserLike like) {
 		likeRepository.save(like);
 	}
+
+	@Override
+	public UserLike getLikeByUserAndPublication(User user, Publication publication) {
+		return likeRepository.findByUserAndPublication(user,publication).orElse(null);
+	}
+	
+	@Override
+	public void deleteLike(UserLike like) {
+		likeRepository.delete(like);
+	}
 	
 }

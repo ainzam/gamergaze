@@ -142,6 +142,18 @@ public class HomeController {
         return "viewBugMessages"; 
     }
 
+    @PostMapping("/deletePublication")
+    public String deleteOwnPublication(@RequestParam("publicationId") Long publicationId) {
+        setCurrentUser();
+        Publication publication = publicationService.getPublicationById(publicationId);
+        
+        if (publication.getUser().getId().equals(currentUser.getId())) {
+            publicationService.deletePublication(publication);
+        }
+        
+        return "redirect:/profile";
+    }
+    
     @GetMapping("/home/admin/contactMessages/GAME_RECOMMENDATION")
     public String viewRecommendationMessages(Model model) {
         List<ContactMessage> allMessages = contactMessageService.getAllContactMessages();
@@ -203,7 +215,6 @@ public class HomeController {
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
         publication.setCreatedAt(new Date());
-        publication.setLikeCount(0);
         
         if (gameId != null) {
             Game game = gameService.getGameById(gameId);

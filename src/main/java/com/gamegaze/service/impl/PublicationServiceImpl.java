@@ -32,8 +32,6 @@ public class PublicationServiceImpl implements PublicationService {
         
     	Publication existingPublication = publicationRepository.findById(publication.getId()).orElse(null);
     	existingPublication.setComments(publication.getComments());
-    	existingPublication.setLikeCount(publication.getLikeCount());
-    	
     	publicationRepository.save(publication);
     }
 

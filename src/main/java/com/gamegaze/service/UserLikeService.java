@@ -11,7 +11,7 @@ public interface UserLikeService {
 	List<UserLike> getLikesByUser(User user);
 	List<UserLike> getLikesByPublication(Publication publication);
 	boolean existsByUserAndPublication(User user, Publication publication);
+	UserLike getLikeByUserAndPublication(User user, Publication publication);
 	void saveLike(UserLike like);
-	
-
+	void deleteLike(UserLike like);
 }

@@ -67,6 +67,12 @@
 		                        <i class='bx bxs-message-rounded-add bx-sm'></i>
 		                        <span class="likeCount" th:text="${publication.comments.size()}"></span>
 		                    </div>
+		                    <div class="deleteButton" th:if="${publication.user.username == currentuser.username}">
+				                <form method="post" th:action="@{/deletePublication}">
+				                    <input type="hidden" name="publicationId" th:value="${publication.id}" />
+				                    <button type="submit" class="delete-btn"><i class="bx bx-x"></i></button>
+				                </form>
+				            </div>
 		                </div>
 					</div>
 				</div>

@@ -895,3 +895,14 @@ nav {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+}
+
+.delete-btn i {
+    font-size: 1.5em;
+}
