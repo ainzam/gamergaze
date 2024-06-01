@@ -43,6 +43,9 @@ public class PublicationController {
     	Publication publication = publicationService.getPublicationById(publicationId);
         Comment comment = new Comment();
         comment.setUser(currentUser);
+        if (commentText.length() > 101) {
+            return "redirect:/publications/" + publicationId + "/post";
+        }
         comment.setTextContent(commentText);
         comment.setPublication(publication);
         comment.setCreatedAt(new Date());

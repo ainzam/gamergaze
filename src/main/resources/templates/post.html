@@ -38,7 +38,7 @@
             </div>
             <div class="post">
                 <form th:action="@{'/publications/' + ${publication.id} + '/comments'}" method="post">
-                    <textarea name="commentText" placeholder="Write a comment..." required></textarea>
+                    <textarea name="commentText" placeholder="Write a comment..." required maxlength="100"></textarea>
                     <button type="submit">Post Comment</button>
                 </form>
             </div>
