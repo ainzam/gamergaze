@@ -102,7 +102,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "followed",cascade = CascadeType.ALL)
     private List<Follow> followers;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserLike> likes;
 
 	public User(String firstName, String lastName, String email, String password, UserRole role, String username) {
