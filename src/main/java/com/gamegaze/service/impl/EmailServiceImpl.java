@@ -18,7 +18,7 @@ public class EmailServiceImpl implements EmailService{
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
-        message.setFrom("tu_correo@gmail.com"); // Cambia esto al correo que estás usando para enviar
+        message.setFrom("gamergazeinfo@gmail.com");
         mailSender.send(message);
     }
 

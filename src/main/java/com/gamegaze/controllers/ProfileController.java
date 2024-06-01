@@ -86,7 +86,7 @@ public class ProfileController {
 	}
 	
     @PostMapping("/profile/edit")
-    public String updateProfile(@RequestParam("email") String email,
+    public String updateProfile(
     		@RequestParam("lastName") String lastName,
     		@RequestParam("firstName") String firstName,
     		@RequestParam("biography") String biography,
@@ -96,16 +96,13 @@ public class ProfileController {
     	setCurrentUser();
     	User existingUser = currentUser;
 
-    	if (email!= null &&!email.isEmpty()) {
-            existingUser.setEmail(email);
-        }
         if (lastName!= null &&!lastName.isEmpty()) {
             existingUser.setLastName(lastName);
         }
         if (firstName!= null &&!firstName.isEmpty()) {
             existingUser.setFirstName(firstName);
         }
-        if (biography!= null &&!biography.isEmpty()) {
+        if (biography!= null && !biography.isEmpty() && biography.length()>= 100) {
             existingUser.setBio(biography);
         }
         if (!profileImage.isEmpty()) {

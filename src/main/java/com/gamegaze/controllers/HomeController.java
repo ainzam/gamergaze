@@ -212,6 +212,10 @@ public class HomeController {
     		@Nullable @RequestParam("gameId") Long gameId) throws IOException {
         setCurrentUser();
         Publication publication = new Publication();
+        
+        if (textContent.length() > 150) {
+            return "redirect:/home";
+        }
         publication.setTextContent(textContent);
         publication.setUser(currentUser);
         publication.setCreatedAt(new Date());

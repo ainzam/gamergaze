@@ -25,13 +25,9 @@
 					        <label for="lastName">Last Name</label>
 					        <input type="text" class="form-control" id="lastName" name="lastName" th:value="${currentuser.lastName}">
 					    </div>
-					 	<div class="mb-3 mt-3">
-					        <label for="email">Email</label>
-					        <input type="text" class="form-control" id="email" name="email" th:value="${currentuser.email}">
-					    </div>
 					    <div class="mb-3 mt-3">
 					        <label for="biography">Biography</label>
-					        <input type="text" class="form-control" id="biography" name="biography" th:value="${currentuser.bio}">
+					        <input type="text" class="form-control" id="biography" name="biography" th:value="${currentuser.bio}" maxlength="100">
 					    </div>
 					    <div class="mb-3 mt-3">
 					        <label for="profileImage">Profile Image</label>

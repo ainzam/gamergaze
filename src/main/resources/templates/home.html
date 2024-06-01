@@ -17,7 +17,7 @@
                         <img th:src="@{/images/{id}(id=${currentuser.profileImage.id})}"
                             alt="User Profile Image"> <span th:text="${currentuser.username}">Username</span>
                     </div>
-                    <textarea id="textContent" name="textContent" placeholder="Write something..."></textarea>
+                    <textarea id="textContent" name="textContent" placeholder="Write something..." maxlength="150"></textarea>
 
 				    <select class="gameSelect" name="gameId" id="games">
 				    	<option value="" selected>Select a game</option>
@@ -37,7 +37,7 @@
                         <img th:src="@{/images/{id}(id=${publication.user.profileImage.id})}" alt="User Profile Image">
                         <span th:text="@{'@' + ${publication.user.username}}"></span><br>
                         <span th:text="${#dates.format(publication.createdAt, 'dd/MM/yyyy HH:mm')}"></span><br>
-                        <span th:text="${publication.game.title}">Title</span>
+                        <span th:text="${publication.game != null? publication.game.title : 'No category'}">Title</span>
                     </a>
                 </div>
                 <p class="post-text" th:text="${publication.textContent}"></p>
