@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -176,6 +177,11 @@ public class HomeController {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         Date suspendUntil = dateFormat.parse(suspendUntilStr);
+        Date now = new Date();
+
+        if (suspendUntil.before(now)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Suspend until date cannot be in the past.");
+        }
 
         User user = userService.getUserById(userId);
         user.setSuspended(true);

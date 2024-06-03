@@ -99,7 +99,7 @@
                         <form id="suspendUserForm">
                             <div class="mb-3">
                                 <label for="suspendUntil" class="form-label">Suspend Until</label>
-                                <input type="datetime-local" class="form-control" id="suspendUntil" name="suspendUntil">
+                                <input type="datetime-local" class="form-control" id="suspendUntil" name="suspendUntil" min="">
                             </div>
                             <input type="hidden" name="userId" id="suspendUserId">
                         </form>
@@ -164,6 +164,11 @@
         var userId = button.getAttribute('data-id');
         var modalUserId = suspendUserModal.querySelector('#suspendUserId');
         modalUserId.value = userId;
+
+        // Set the minimum datetime value to the current datetime
+        var now = new Date();
+        var localDateTime = now.toISOString().slice(0, 16); // Converts to local datetime string in 'YYYY-MM-DDTHH:MM' format
+        document.getElementById('suspendUntil').min = localDateTime;
     });
     
     var csrfToken = $("meta[name='_csrf']").attr("content");
