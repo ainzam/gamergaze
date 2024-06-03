@@ -71,6 +71,7 @@ public class ChatController {
 			chatService.saveMessage(message);
 			messagingTemplate.convertAndSend("/topic/messages/" + message.getRecipientId(), message);
 		}
+		
 	    private void setCurrentUser() {
 	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	        String username = authentication.getName();

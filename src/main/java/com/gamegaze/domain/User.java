@@ -18,7 +18,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -93,13 +92,13 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Image profileImage;
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Publication> publications;
     
-    @OneToMany(mappedBy = "follower",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL)
     private List<Follow> follows;
 
-    @OneToMany(mappedBy = "followed",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL)
     private List<Follow> followers;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
