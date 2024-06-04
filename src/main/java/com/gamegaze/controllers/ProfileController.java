@@ -102,7 +102,7 @@ public class ProfileController {
         if (firstName!= null &&!firstName.isEmpty()) {
             existingUser.setFirstName(firstName);
         }
-        if (biography!= null && !biography.isEmpty() && biography.length()>= 100) {
+        if (biography!= null && !biography.isEmpty() && biography.length()<= 100) {
             existingUser.setBio(biography);
         }
         if (!profileImage.isEmpty()) {
